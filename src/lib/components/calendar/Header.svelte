@@ -27,7 +27,7 @@
 </script>
 
 <header class="justify-between">
-	<Container>
+	<Container className="border-b pb-1">
 		<nav>
 			<ul class="flex justify-between">
 				<li class="">
@@ -37,10 +37,7 @@
 						><Arrow direction="left" />{format(previousMonthPath, 'MMMM')}</a
 					>
 				</li>
-				<li
-					class="flex items-center bg-slate-100a capitalize px-4 text-3xl font-bold"
-					aria-current="page"
-				>
+				<li class="flex items-center capitalize px-4 text-3xl font-bold" aria-current="page">
 					{format(currentMonthPath, 'MMMM yyyy')}
 				</li>
 				<li>

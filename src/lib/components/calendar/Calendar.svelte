@@ -28,7 +28,7 @@
 </svelte:head>
 
 <Header {currentMonth} />
-<Container className="mt-4">
+<Container className="pt-3 pb-8">
 	<main>
 		{#if month.loading}<div>Laddar...</div>{/if}
 		{#if month.error}<div class="p-4 bg-red-100" role="alert">
@@ -38,7 +38,7 @@
 		{#if month.weeks}
 			<table class="w-full border-collapse">
 				<thead>
-					<tr>
+					<tr class="[&>*]:p-1.5">
 						<th class="w-[5.5%]">Vecka</th>
 						<th class="w-[13.5%]">Måndag</th>
 						<th class="w-[13.5%]">Tisdag</th>
@@ -78,7 +78,7 @@
 			</table>
 		{/if}
 		{#if month.days}
-			<ul class="my-8">
+			<ul class="mt-8">
 				{#each month.days as day}
 					<li
 						class={classNames(
@@ -100,9 +100,3 @@
 		{/if}
 	</main>
 </Container>
-
-<style>
-	.red-day {
-		background-color: rgb(241, 191, 191);
-	}
-</style>

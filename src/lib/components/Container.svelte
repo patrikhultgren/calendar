@@ -3,6 +3,8 @@
 	export let className: string = ''
 </script>
 
-<div class={classNames('mx-auto', 'relative', 'max-w-[1000px]', className)}>
-	<slot />
+<div class={classNames('mx-auto', 'relative', 'max-w-[1000px]', 'bg-white', className)}>
+	<div class="md:px-10">
+		<slot />
+	</div>
 </div>
