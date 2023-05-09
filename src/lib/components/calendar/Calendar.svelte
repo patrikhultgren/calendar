@@ -45,7 +45,7 @@
 	<main>
 		{#if month.loading}<div>Laddar...</div>{/if}
 		{#if month.error}<div class="p-4 bg-red-100 mx-4 sm:mx-0" role="alert">
-				Ett fel uppstod. Försök gärna igen senare...
+				Ett fel uppstod. Försök igen senare...
 			</div>
 		{/if}
 		{#if month.weeks}
