@@ -84,7 +84,7 @@
 												<div class="text-sm">{day.namnsdag.join(', ')}</div>
 											{/if}
 											{#if day.flaggdag}
-												<div class="text-sm text-red-600 font-bold">{day.flaggdag}</div>
+												<div class="text-sm text-red-600 font-bold break-all">{day.flaggdag}</div>
 											{/if}
 										</div>
 									</div>
