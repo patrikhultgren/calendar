@@ -1,7 +1,7 @@
 import endpoints from '$lib/services/faboul/endpoints'
 import request from '$lib/utils/request'
 
-export type IDay = {
+type IFaboulDay = {
 	datum: string
 	veckodag: string
 	'arbetsfri dag': 'Ja' | 'Nej'
@@ -12,10 +12,20 @@ export type IDay = {
 	flaggdag: string
 }
 
+export type ICalendarDay = {
+	date: Date
+	week: number
+	weekday: number
+	isNonWorkingDay: boolean
+	isRedDay: boolean
+	flagDay: string
+	names: Array<string>
+}
+
 export interface IMonth {
 	date: Date | null
-	weeks: Array<Array<IDay>> | null
-	days: Array<IDay> | null
+	weeks: Array<Array<ICalendarDay>> | null
+	days: Array<ICalendarDay> | null
 	loading: boolean
 	error: any
 }
@@ -67,15 +77,17 @@ const fetchMonth = async (currentMonth: Date): Promise<IMonth> => {
 			}
 		}
 
-		const currentDays = results[1].value.dagar
+		const previousDays = transformDays(results[0].value.dagar)
+		const currentDays = transformDays(results[1].value.dagar)
+		const nextDays = transformDays(results[2].value.dagar)
 
-		const firstWeek = currentDays[0].vecka
-		const lastWeek = currentDays[currentDays.length - 1].vecka
+		const firstWeek = currentDays[0].week
+		const lastWeek = currentDays[currentDays.length - 1].week
 
 		monthAndNearbyDays = [
-			...results[0].value.dagar.filter((day: IDay) => day.vecka === firstWeek),
+			...previousDays.filter((day) => day.week === firstWeek),
 			...currentDays,
-			...results[2].value.dagar.filter((day: IDay) => day.vecka === lastWeek)
+			...nextDays.filter((day) => day.week === lastWeek)
 		]
 
 		return {
@@ -91,8 +103,21 @@ const fetchMonth = async (currentMonth: Date): Promise<IMonth> => {
 	}
 }
 
-const transformIntoWeeks = (monthAndNearbyDays: Array<IDay>): Array<Array<IDay>> => {
-	let weeks: Array<Array<IDay>> = []
+const transformDays = (days: Array<IFaboulDay>): Array<ICalendarDay> =>
+	days.map((day) => ({
+		date: new Date(day.datum),
+		week: parseInt(day.vecka),
+		weekday: parseInt(day['dag i vecka']),
+		isNonWorkingDay: day['arbetsfri dag'] === 'Ja',
+		isRedDay: day['röd dag'] === 'Ja',
+		flagDay: day.flaggdag,
+		names: day.namnsdag
+	}))
+
+const transformIntoWeeks = (
+	monthAndNearbyDays: Array<ICalendarDay>
+): Array<Array<ICalendarDay>> => {
+	let weeks: Array<Array<ICalendarDay>> = []
 	let weekIndex = 0
 
 	for (let i = 0; i < monthAndNearbyDays.length; i++) {
@@ -104,7 +129,7 @@ const transformIntoWeeks = (monthAndNearbyDays: Array<IDay>): Array<Array<IDay>>
 
 		weeks[weekIndex].push(day)
 
-		if (day.veckodag === 'Söndag') {
+		if (day.weekday === 7) {
 			weekIndex++
 		}
 	}

@@ -65,13 +65,13 @@
 					{#each month.weeks as week}
 						<tr>
 							<td class="text-center border border-gray-300 font-bold sm:text-xl bg-gray-100"
-								>{week[0].vecka}</td
+								>{week[0].week}</td
 							>
 							{#each week as day}
 								<td
 									class={classNames(
-										{ 'bg-red-200': day['röd dag'] === 'Ja' },
-										day.datum === format(now, 'yyyy-MM-dd')
+										{ 'bg-red-200': day.isRedDay },
+										format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
 											? 'border-2 border-gray-500'
 											: 'border border-gray-300',
 										'align-top',
@@ -80,14 +80,14 @@
 								>
 									<div class="sm:min-h-[100px]">
 										<div class="font-bold text-base text-center sm:text-left">
-											{format(day.datum, 'd')}
+											{format(day.date, 'd')}
 										</div>
 										<div class="hidden sm:block">
-											{#if day.flaggdag}
-												<div class="text-sm text-red-600 font-bold break-all">{day.flaggdag}</div>
+											{#if day.flagDay}
+												<div class="text-sm text-red-600 font-bold break-all">{day.flagDay}</div>
 											{/if}
-											{#if day.namnsdag.length}
-												<div class="text-sm">{day.namnsdag.join(', ')}</div>
+											{#if day.names.length}
+												<div class="text-sm">{day.names.join(', ')}</div>
 											{/if}
 										</div>
 									</div>
@@ -103,8 +103,8 @@
 				{#each month.days as day}
 					<li
 						class={classNames(
-							{ 'bg-red-200': day['röd dag'] === 'Ja' },
-							day.datum === format(now, 'yyyy-MM-dd')
+							{ 'bg-red-200': day.isRedDay },
+							format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
 								? 'border-2 border-gray-500'
 								: 'border-x border-t border-gray-300 last:border-b',
 							'py-2',
@@ -112,16 +112,16 @@
 						)}
 					>
 						<div class="font-bold text-xl capitalize">
-							{format(day.datum, 'd')}
+							{format(day.date, 'd')}
 							<span class="text-gray-700">
-								{format(day.datum, 'iiii')}
+								{format(day.date, 'iiii')}
 							</span>
 						</div>
-						{#if day.flaggdag}
-							<div class="text-red-600 font-bold">{day.flaggdag}</div>
+						{#if day.flagDay}
+							<div class="text-red-600 font-bold">{day.flagDay}</div>
 						{/if}
-						{#if day.namnsdag.length}
-							<div class="text-sm">{day.namnsdag.join(' • ')}</div>
+						{#if day.names.length}
+							<div class="text-sm">{day.names.join(' • ')}</div>
 						{/if}
 					</li>
 				{/each}
