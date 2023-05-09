@@ -25,17 +25,19 @@
 	$: nextMonthPath = getMonthPath(nextMonth)
 </script>
 
-<header>
-	<h1>{format(currentMonth.toString(), 'yyyy')}</h1>
+<header class="justify-between">
+	<h1 class="text-2xl md:text-4xl text-center">{format(currentMonth.toString(), 'yyyy')}</h1>
 	<nav>
-		<ul>
-			<li aria-current={$page.url.pathname === previousMonthPath ? 'page' : undefined}>
-				<a href={previousMonthPath}>{format(previousMonthPath.toString(), 'MMMM')}</a>
+		<ul class="flex justify-between">
+			<li class="">
+				<a class="block py-2" href={previousMonthPath}
+					>{format(previousMonthPath.toString(), 'MMMM')}</a
+				>
 			</li>
-			<li aria-current={$page.url.pathname === currentMonthPath ? 'page' : undefined}>
+			<li class="block py-2" aria-current="page">
 				<a href={currentMonthPath}>{format(currentMonthPath.toString(), 'MMMM')}</a>
 			</li>
-			<li aria-current={$page.url.pathname === nextMonthPath ? 'page' : undefined}>
+			<li class="block py-2">
 				<a href={nextMonthPath}>{format(nextMonthPath.toString(), 'MMMM')}</a>
 			</li>
 		</ul>
@@ -43,18 +45,7 @@
 </header>
 
 <style>
-	header {
-		/* display: flex; */
-		justify-content: space-between;
-	}
-
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-	}
-
-	ul {
+	/* ul {
 		position: relative;
 		padding: 0;
 		margin: 0;
@@ -100,5 +91,5 @@
 
 	a:hover {
 		color: var(--color-theme-1);
-	}
+	} */
 </style>

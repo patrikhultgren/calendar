@@ -29,7 +29,7 @@
 	{#if month.loading}<div>Laddar...</div>{/if}
 	{#if month.error}<div>Ett fel uppstod</div>{/if}
 	{#if month.weeks}
-		<table>
+		<table class="w-full">
 			<thead>
 				<tr>
 					<th>Vecka</th>
@@ -47,7 +47,7 @@
 					<tr>
 						<td>{week[0].vecka}</td>
 						{#each week as day}
-							<td class={day['röd dag'] === 'Ja' ? 'red-day' : ''}>
+							<td class={day['röd dag'] === 'Ja' ? 'bg-red-100' : ''}>
 								<p>{day.datum}</p>
 								<p>{day.namnsdag.join(',')}</p>
 								<p>{day.flaggdag}</p>
@@ -61,7 +61,7 @@
 	{#if month.days}
 		<ul>
 			{#each month.days as day}
-				<li class={day['röd dag'] === 'Ja' ? 'red-day' : ''}>
+				<li class={day['röd dag'] === 'Ja' ? 'bg-red-100' : ''}>
 					<p>{day.datum}</p>
 					<p>{day.namnsdag.join(',')}</p>
 					<p>{day.flaggdag}</p>
