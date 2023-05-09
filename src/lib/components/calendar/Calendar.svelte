@@ -7,9 +7,10 @@
 	import { format } from '$lib/utils/date'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 
-	export let currentMonth = new Date()
-
 	let now = new Date()
+
+	export let currentMonth = now
+
 	let month: IMonth = { ...initialState }
 
 	$: {
