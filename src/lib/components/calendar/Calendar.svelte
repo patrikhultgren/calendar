@@ -109,7 +109,12 @@
 							'border-gray-300'
 						)}
 					>
-						<div class="font-bold text-xl">{format(day.datum, 'd MMMM')}</div>
+						<div class="font-bold text-xl capitalize">
+							{format(day.datum, 'd')}
+							<span class="text-gray-700">
+								{format(day.datum, 'iiii')}
+							</span>
+						</div>
 						{#if day.flaggdag}
 							<div class="text-red-600 font-bold">{day.flaggdag}</div>
 						{/if}
