@@ -9,6 +9,7 @@
 
 	export let currentMonth = new Date()
 
+	let now = new Date()
 	let month: IMonth = { ...initialState }
 
 	$: {
@@ -69,9 +70,10 @@
 								<td
 									class={classNames(
 										{ 'bg-red-200': day['röd dag'] === 'Ja' },
+										day.datum === format(now, 'yyyy-MM-dd')
+											? 'border-2 border-gray-500'
+											: 'border border-gray-300',
 										'align-top',
-										'border',
-										'border-gray-300',
 										'p-2'
 									)}
 								>
@@ -101,12 +103,11 @@
 					<li
 						class={classNames(
 							{ 'bg-red-200': day['röd dag'] === 'Ja' },
+							day.datum === format(now, 'yyyy-MM-dd')
+								? 'border-2 border-gray-500'
+								: 'border-x border-t border-gray-300 last:border-b',
 							'py-2',
-							'px-4',
-							'border-x',
-							'border-t',
-							'last:border-b',
-							'border-gray-300'
+							'px-4'
 						)}
 					>
 						<div class="font-bold text-xl capitalize">
