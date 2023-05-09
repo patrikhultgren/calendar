@@ -105,9 +105,9 @@
 							'border-gray-300'
 						)}
 					>
-						<div>{day.datum}</div>
-						<div>{day.namnsdag.join(',')}</div>
-						<div>{day.flaggdag}</div>
+						<div class="font-bold text-xl">{format(day.datum, 'd MMMM')}</div>
+						<div class="text-red-600 font-bold">{day.flaggdag}</div>
+						<div>{day.namnsdag.join(' • ')}</div>
 					</li>
 				{/each}
 			</ul>
