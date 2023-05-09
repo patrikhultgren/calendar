@@ -70,7 +70,13 @@
 							{#each week as day}
 								<td
 									class={classNames(
-										{ 'bg-red-200': day.isRedDay },
+										{
+											'bg-red-200': day.isRedDay
+										},
+										{
+											'bg-gray-100':
+												!day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
+										},
 										format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
 											? 'border-2 border-gray-500'
 											: 'border border-gray-300',
