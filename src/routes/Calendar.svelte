@@ -6,11 +6,22 @@
 
 	export let currentMonth = new Date()
 
-	let month: IMonth = initialState
+	let month: IMonth = { ...initialState }
+	let isMounted = false
 
-	onMount(async function () {
-		month = await fetchMonth(currentMonth)
+	onMount(function () {
+		isMounted = true
 	})
+
+	$: {
+		if (isMounted) {
+			month.loading = true
+
+			fetchMonth(currentMonth).then((data) => {
+				month = data
+			})
+		}
+	}
 </script>
 
 <svelte:head>
@@ -20,6 +31,7 @@
 
 <Header {currentMonth} />
 <main>
+	{#if month.loading}<div>Laddar...</div>{/if}
 	{#if month.weeks}
 		<table>
 			<thead>
