@@ -107,7 +107,9 @@
 		{#if month.weeks}
 			{#each month.weeks as week}
 				<article>
-					<h2 class="px-4 py-2 border border-gray-300 font-bold sm:text-xl bg-gray-50 mt-8">
+					<h2
+						class="px-4 py-2 border border-gray-300 font-bold sm:text-xl bg-gray-50 mt-8 text-xl sm:text-2xl"
+					>
 						Vecka {week[0].week}
 					</h2>
 					<ul>
@@ -126,7 +128,7 @@
 									'hover:bg-gray-200'
 								)}
 							>
-								<div class="font-bold text-xl capitalize flex">
+								<div class="font-bold sm:text-xl capitalize flex">
 									{format(day.date, 'iiii, d MMM')}
 								</div>
 								{#if day.flagDay}
