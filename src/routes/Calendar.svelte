@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	import Header from './Header.svelte'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 
-	export let date = new Date()
+	export let currentMonth = new Date()
 
 	let month: IMonth = initialState
 
 	onMount(async function () {
-		month = await fetchMonth(date.getFullYear(), date.getMonth())
+		month = await fetchMonth(currentMonth)
 	})
 </script>
 
@@ -17,7 +18,8 @@
 	<meta name="description" content="Kalender med veckonummer" />
 </svelte:head>
 
-<section>
+<Header {currentMonth} />
+<main>
 	{#if month.weeks}
 		<table>
 			<thead>
@@ -59,7 +61,7 @@
 			{/each}
 		</ul>
 	{/if}
-</section>
+</main>
 
 <style>
 	.red-day {

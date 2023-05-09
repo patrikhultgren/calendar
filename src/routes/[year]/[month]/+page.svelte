@@ -3,4 +3,4 @@
 	export let data: any
 </script>
 
-<Calendar date={new Date(data.year, parseInt(data.month) - 1)} />
+<Calendar currentMonth={new Date(data.year, parseInt(data.month) - 1)} />

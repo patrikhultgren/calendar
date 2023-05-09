@@ -13,6 +13,7 @@ export type IDay = {
 }
 
 export interface IMonth {
+	date: Date | null
 	weeks: Array<Array<IDay>> | null
 	days: Array<IDay> | null
 	loading: boolean
@@ -20,16 +21,15 @@ export interface IMonth {
 }
 
 export const initialState = {
+	date: null,
 	weeks: null,
 	days: null,
 	loading: false,
 	error: null
 }
 
-const fetchMonth = async (year: number, month: number): Promise<IMonth> => {
+const fetchMonth = async (date: Date): Promise<IMonth> => {
 	let monthAndNearbyDays: Array<any> = []
-
-	const date = new Date(year, month)
 
 	let previousMonth = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 	previousMonth.setMonth(date.getMonth() - 1)
