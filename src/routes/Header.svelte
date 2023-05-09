@@ -26,6 +26,7 @@
 </script>
 
 <header>
+	<h1>{format(currentMonth.toString(), 'yyyy')}</h1>
 	<nav>
 		<ul>
 			<li aria-current={$page.url.pathname === previousMonthPath ? 'page' : undefined}>
@@ -43,7 +44,7 @@
 
 <style>
 	header {
-		display: flex;
+		/* display: flex; */
 		justify-content: space-between;
 	}
 

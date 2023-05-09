@@ -1,5 +1,5 @@
-// import { format } from '$lib/utils/date'
-const FABOUL_API_URL = 'https://sholiday.faboul.se/dagar/v2.1'
+// const FABOUL_API_URL = 'https://sholiday.faboul.se/dagar/v2.1'
+const FABOUL_API_URL = '/api/days'
 
 const endpoints = {
 	getMonthUrl: (year: number, month: number): string =>

@@ -17,14 +17,9 @@
 		if (isMounted) {
 			month.loading = true
 
-			fetchMonth(currentMonth).then(
-				(data) => {
-					month = data
-				},
-				(data) => {
-					month = data
-				}
-			)
+			fetchMonth(currentMonth).then((data) => {
+				month = data
+			})
 		}
 	}
 </script>
@@ -37,6 +32,7 @@
 <Header {currentMonth} />
 <main>
 	{#if month.loading}<div>Laddar...</div>{/if}
+	{#if month.error}<div>Ett fel uppstod</div>{/if}
 	{#if month.weeks}
 		<table>
 			<thead>
