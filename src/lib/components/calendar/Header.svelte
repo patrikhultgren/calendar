@@ -27,7 +27,7 @@
 </script>
 
 <header>
-	<Container className="border-b">
+	<Container className="border-b border-gray-300">
 		<nav class="flex justify-between">
 			<a
 				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"

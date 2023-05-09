@@ -64,7 +64,7 @@
 				<tbody>
 					{#each month.weeks as week}
 						<tr>
-							<td class="text-center border border-gray-300 font-bold sm:text-xl bg-gray-100"
+							<td class="text-center border border-gray-400 font-bold sm:text-xl bg-gray-100"
 								>{week[0].week.toString().padStart(2, '0')}</td
 							>
 							{#each week as day}
@@ -78,8 +78,8 @@
 												!day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
 										},
 										format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
-											? 'border-2 border-gray-500'
-											: 'border border-gray-300',
+											? 'border-4 border-gray-500'
+											: 'border border-gray-400',
 										'align-top',
 										'p-2'
 									)}
@@ -110,7 +110,7 @@
 			{#each month.weeks as week}
 				<article>
 					<h2
-						class="px-4 py-2 border border-gray-300 font-bold sm:text-xl bg-gray-50 mt-8 text-xl sm:text-2xl"
+						class="px-4 py-2 border border-gray-400 font-bold sm:text-xl bg-gray-50 mt-8 text-xl sm:text-2xl"
 					>
 						Vecka {week[0].week}
 					</h2>
@@ -123,8 +123,8 @@
 										'bg-gray-100': !day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
 									},
 									format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
-										? 'border-2 border-gray-500'
-										: 'border-x border-t border-gray-300 last:border-b',
+										? 'border-4 border-gray-500'
+										: 'border-x border-t border-gray-400 first:border-t-0 last:border-b',
 									'py-2',
 									'px-4',
 									'hover:bg-gray-200'
