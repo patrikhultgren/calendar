@@ -17,9 +17,14 @@
 		if (isMounted) {
 			month.loading = true
 
-			fetchMonth(currentMonth).then((data) => {
-				month = data
-			})
+			fetchMonth(currentMonth).then(
+				(data) => {
+					month = data
+				},
+				(data) => {
+					month = data
+				}
+			)
 		}
 	}
 </script>
