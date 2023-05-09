@@ -80,8 +80,12 @@
 											{format(day.datum, 'd')}
 										</div>
 										<div class="hidden sm:block">
-											<div class="text-sm">{day.namnsdag.join(', ')}</div>
-											<div class="text-sm text-red-600 font-bold">{day.flaggdag}</div>
+											{#if day.namnsdag.length}
+												<div class="text-sm">{day.namnsdag.join(', ')}</div>
+											{/if}
+											{#if day.flaggdag}
+												<div class="text-sm text-red-600 font-bold">{day.flaggdag}</div>
+											{/if}
 										</div>
 									</div>
 								</td>
@@ -106,8 +110,12 @@
 						)}
 					>
 						<div class="font-bold text-xl">{format(day.datum, 'd MMMM')}</div>
-						<div class="text-red-600 font-bold">{day.flaggdag}</div>
-						<div>{day.namnsdag.join(' • ')}</div>
+						{#if day.flaggdag}
+							<div class="text-red-600 font-bold">{day.flaggdag}</div>
+						{/if}
+						{#if day.namnsdag.length}
+							<div class="text-sm">{day.namnsdag.join(' • ')}</div>
+						{/if}
 					</li>
 				{/each}
 			</ul>
