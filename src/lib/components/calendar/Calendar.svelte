@@ -41,7 +41,7 @@
 </svelte:head>
 
 <Header {currentMonth} />
-<Container className="pt-3 pb-8">
+<Container className="pt-[4.5rem] pb-8">
 	<main>
 		{#if month.loading}<div>Laddar...</div>{/if}
 		{#if month.error}<div class="p-4 bg-red-100 mx-4 sm:mx-0" role="alert">

@@ -26,8 +26,8 @@
 	$: nextMonthPath = getMonthPath(nextMonth)
 </script>
 
-<header>
-	<Container className="border-b border-gray-300">
+<header class="fixed top-0 left-0 w-full z-10">
+	<Container className="border-t sm:border-t-0 border-gray-300 shadow">
 		<nav class="flex justify-between">
 			<a
 				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"
