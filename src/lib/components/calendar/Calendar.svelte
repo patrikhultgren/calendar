@@ -2,7 +2,7 @@
 	import classNames from 'classnames'
 	import Header from './Header.svelte'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
-	import Container from '$lib/components/Container.svelte'
+	import Container from '$lib/components/layout/Container.svelte'
 	import mounted from '$lib/utils/mounted'
 	import { format } from '$lib/utils/date'
 	import type { IMonth } from '$lib/utils/fetchMonth'
@@ -10,17 +10,6 @@
 	export let currentMonth = new Date()
 
 	let month: IMonth = { ...initialState }
-
-	let columns: Array<{ short: string; long: string; class: string }> = [
-		{ short: 'V', long: 'Vecka', class: 'w-[9%]' },
-		{ short: 'Mån', long: 'Måndag', class: 'w-[13%]' },
-		{ short: 'Tis', long: 'Tisdag', class: 'w-[13%]' },
-		{ short: 'Ons', long: 'Onsdag', class: 'w-[13%]' },
-		{ short: 'Tor', long: 'Torsdag', class: 'w-[13%]' },
-		{ short: 'Fre', long: 'Fredag', class: 'w-[13%]' },
-		{ short: 'Lör', long: 'Lördag', class: 'w-[13%]' },
-		{ short: 'Sön', long: 'Söndag', class: 'w-[13%]' }
-	]
 
 	$: {
 		if (mounted) {
@@ -31,6 +20,17 @@
 			})
 		}
 	}
+
+	const columns: Array<{ short: string; long: string; class: string }> = [
+		{ short: 'V', long: 'Vecka', class: 'w-[9%]' },
+		{ short: 'Mån', long: 'Måndag', class: 'w-[13%]' },
+		{ short: 'Tis', long: 'Tisdag', class: 'w-[13%]' },
+		{ short: 'Ons', long: 'Onsdag', class: 'w-[13%]' },
+		{ short: 'Tor', long: 'Torsdag', class: 'w-[13%]' },
+		{ short: 'Fre', long: 'Fredag', class: 'w-[13%]' },
+		{ short: 'Lör', long: 'Lördag', class: 'w-[13%]' },
+		{ short: 'Sön', long: 'Söndag', class: 'w-[13%]' }
+	]
 </script>
 
 <svelte:head>
