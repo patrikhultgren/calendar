@@ -30,7 +30,7 @@
 		<nav class="flex justify-between">
 			<a
 				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"
-				href={previousMonthPath}><Arrow direction="left" />{format(previousMonthPath, 'MMMM')}</a
+				href={previousMonthPath}><Arrow direction="left" />{format(previousMonth, 'MMMM')}</a
 			>
 			<h1 class="flex items-center capitalize px-4 text-2xl sm:text-3xl font-bold">
 				<span class="inline sm:hidden">{format(currentMonth, 'MMM yyyy').replace('.', '')}</span>
@@ -38,7 +38,7 @@
 			</h1>
 			<a
 				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"
-				href={nextMonthPath}>{format(nextMonthPath, 'MMMM')}<Arrow direction="right" /></a
+				href={nextMonthPath}>{format(nextMonth, 'MMMM')}<Arrow direction="right" /></a
 			>
 		</nav>
 	</Container>
