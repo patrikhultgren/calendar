@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
+	import type { IMonth } from '$lib/utils/fetchMonth'
 
 	export let date = new Date()
 
-	let month: any = initialState
+	let month: IMonth = initialState
 
 	onMount(async function () {
 		month = await fetchMonth(date.getFullYear(), date.getMonth())
