@@ -1,20 +1,15 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
 	import Header from './Header.svelte'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
+	import mounted from '$lib/utils/mounted'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 
 	export let currentMonth = new Date()
 
 	let month: IMonth = { ...initialState }
-	let isMounted = false
-
-	onMount(function () {
-		isMounted = true
-	})
 
 	$: {
-		if (isMounted) {
+		if (mounted) {
 			month.loading = true
 
 			fetchMonth(currentMonth).then((data) => {
