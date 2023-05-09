@@ -11,6 +11,17 @@
 
 	let month: IMonth = { ...initialState }
 
+	let columns: Array<{ short: string; long: string; class: string }> = [
+		{ short: 'V', long: 'Vecka', class: 'w-[9%]' },
+		{ short: 'Mån', long: 'Måndag', class: 'w-[13%]' },
+		{ short: 'Tis', long: 'Tisdag', class: 'w-[13%]' },
+		{ short: 'Ons', long: 'Onsdag', class: 'w-[13%]' },
+		{ short: 'Tor', long: 'Torsdag', class: 'w-[13%]' },
+		{ short: 'Fre', long: 'Fredag', class: 'w-[13%]' },
+		{ short: 'Lör', long: 'Lördag', class: 'w-[13%]' },
+		{ short: 'Sön', long: 'Söndag', class: 'w-[13%]' }
+	]
+
 	$: {
 		if (mounted) {
 			month.loading = true
@@ -31,7 +42,7 @@
 <Container className="pt-3 pb-8">
 	<main>
 		{#if month.loading}<div>Laddar...</div>{/if}
-		{#if month.error}<div class="p-4 bg-red-100" role="alert">
+		{#if month.error}<div class="p-4 bg-red-100 mx-4 sm:mx-0" role="alert">
 				Ett fel uppstod. Försök gärna igen senare...
 			</div>
 		{/if}
@@ -39,20 +50,19 @@
 			<table class="w-full border-collapse">
 				<thead>
 					<tr class="[&>*]:p-1.5">
-						<th class="w-[5.5%]">Vecka</th>
-						<th class="w-[13.5%]">Måndag</th>
-						<th class="w-[13.5%]">Tisdag</th>
-						<th class="w-[13.5%]">Onsdag</th>
-						<th class="w-[13.5%]">Torsdag</th>
-						<th class="w-[13.5%]">Fredag</th>
-						<th class="w-[13.5%]">Lördag</th>
-						<th class="w-[13.5%]">Söndag</th>
+						{#each columns as column}
+							<th class={column.class}
+								><span class="inline sm:hidden">{column.short}</span><span class="hidden sm:inline"
+									>{column.long}</span
+								></th
+							>
+						{/each}
 					</tr>
 				</thead>
 				<tbody>
 					{#each month.weeks as week}
 						<tr>
-							<td class="text-center border border-gray-300 font-bold text-xl bg-gray-100"
+							<td class="text-center border border-gray-300 font-bold sm:text-xl bg-gray-100"
 								>{week[0].vecka}</td
 							>
 							{#each week as day}
@@ -65,10 +75,14 @@
 										'p-2'
 									)}
 								>
-									<div class="min-h-[100px]">
-										<div class="font-bold text-base">{format(day.datum, 'd')}</div>
-										<div class="text-sm">{day.namnsdag.join(', ')}</div>
-										<div class="text-sm text-red-600 font-bold">{day.flaggdag}</div>
+									<div class="sm:min-h-[100px]">
+										<div class="font-bold text-base text-center sm:text-left">
+											{format(day.datum, 'd')}
+										</div>
+										<div class="hidden sm:block">
+											<div class="text-sm">{day.namnsdag.join(', ')}</div>
+											<div class="text-sm text-red-600 font-bold">{day.flaggdag}</div>
+										</div>
 									</div>
 								</td>
 							{/each}

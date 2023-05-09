@@ -26,27 +26,22 @@
 	$: nextMonthPath = getMonthPath(nextMonth)
 </script>
 
-<header class="justify-between">
-	<Container className="border-b pb-1">
-		<nav>
-			<ul class="flex justify-between">
-				<li class="">
-					<a
-						class="flex py-2 px-4 items-center capitalize bg-slate-50a rounded text-xl font-bold"
-						href={previousMonthPath}
-						><Arrow direction="left" />{format(previousMonthPath, 'MMMM')}</a
-					>
-				</li>
-				<li class="flex items-center capitalize px-4 text-3xl font-bold" aria-current="page">
-					{format(currentMonthPath, 'MMMM yyyy')}
-				</li>
-				<li>
-					<a
-						class="flex py-2 px-4 items-center capitalize bg-slate-50a rounded text-xl font-bold"
-						href={nextMonthPath}>{format(nextMonthPath, 'MMMM')}<Arrow direction="right" /></a
-					>
-				</li>
-			</ul>
+<header>
+	<Container className="border-b">
+		<nav class="flex justify-between">
+			<a
+				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"
+				href={previousMonthPath}><Arrow direction="left" />{format(previousMonthPath, 'MMMM')}</a
+			>
+			<div class="flex items-center capitalize px-4 text-2xl sm:text-3xl font-bold">
+				<span class="inline sm:hidden">{format(currentMonthPath, 'MMM yyyy').replace('.', '')}</span
+				>
+				<span class="hidden sm:inline">{format(currentMonthPath, 'MMMM yyyy')}</span>
+			</div>
+			<a
+				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"
+				href={nextMonthPath}>{format(nextMonthPath, 'MMMM')}<Arrow direction="right" /></a
+			>
 		</nav>
 	</Container>
 </header>
