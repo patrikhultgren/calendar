@@ -90,7 +90,9 @@
 										</div>
 										<div class="hidden sm:block">
 											{#if day.flagDay}
-												<div class="text-sm text-red-600 font-bold break-all">{day.flagDay}</div>
+												<div class="text-sm text-red-600 font-bold break-words">
+													{day.flagDay}
+												</div>
 											{/if}
 											{#if day.names.length}
 												<div class="text-sm">{day.names.join(', ')}</div>
