@@ -118,6 +118,7 @@
 						{#each week as day}
 							<li
 								class={classNames(
+									day.isRedDay ? 'hover:bg-red-300' : 'hover:bg-gray-200',
 									{ 'bg-red-200': day.isRedDay },
 									{
 										'bg-gray-100': !day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
@@ -127,7 +128,7 @@
 										: 'border-x border-t border-gray-400 first:border-t-0 last:border-b',
 									'py-2',
 									'px-4',
-									'hover:bg-gray-200'
+									''
 								)}
 							>
 								<div class="font-bold sm:text-xl capitalize flex">
