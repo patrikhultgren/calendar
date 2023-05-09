@@ -8,7 +8,7 @@ export class StatusError extends Error {
 	}
 }
 
-const checkStatus = (response: any) => {
+const checkStatus = (response: Response) => {
 	if (response.ok) {
 		return response
 	}
@@ -16,7 +16,7 @@ const checkStatus = (response: any) => {
 	throw new StatusError(`Status error: ${response.status}`, response.status)
 }
 
-const parseJSON = (response: any) => response.json()
+const parseJSON = (response: Response) => response.json()
 
 interface IRequestParams {
 	endpoint: string
