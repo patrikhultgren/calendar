@@ -24,14 +24,14 @@
 	}
 
 	const columns: Array<{ short: string; long: string; class: string }> = [
-		{ short: 'V', long: 'Vecka', class: 'w-[9%]' },
-		{ short: 'Mån', long: 'Måndag', class: 'w-[13%]' },
-		{ short: 'Tis', long: 'Tisdag', class: 'w-[13%]' },
-		{ short: 'Ons', long: 'Onsdag', class: 'w-[13%]' },
-		{ short: 'Tor', long: 'Torsdag', class: 'w-[13%]' },
-		{ short: 'Fre', long: 'Fredag', class: 'w-[13%]' },
-		{ short: 'Lör', long: 'Lördag', class: 'w-[13%]' },
-		{ short: 'Sön', long: 'Söndag', class: 'w-[13%]' }
+		{ short: 'V', long: 'Vecka', class: 'w-[9%] sm:w-[5%]' },
+		{ short: 'Mån', long: 'Måndag', class: 'w-[13%] sm:w-[14%]' },
+		{ short: 'Tis', long: 'Tisdag', class: 'w-[13%] sm:w-[14%]' },
+		{ short: 'Ons', long: 'Onsdag', class: 'w-[13%] sm:w-[14%]' },
+		{ short: 'Tor', long: 'Torsdag', class: 'w-[13%] sm:w-[14%]' },
+		{ short: 'Fre', long: 'Fredag', class: 'w-[13%] sm:w-[13%]' },
+		{ short: 'Lör', long: 'Lördag', class: 'w-[13%] sm:w-[13%]' },
+		{ short: 'Sön', long: 'Söndag', class: 'w-[13%] sm:w-[13%]' }
 	]
 </script>
 
