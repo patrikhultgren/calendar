@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { format } from '$lib/utils/date'
 	import { getMonthPath } from '$lib/utils/path'
-	import Arrow from '$lib/components/icon/arrow/Arrow.svelte'
+	import Arrow from '$lib/components/icon/Arrow.svelte'
 
 	export let currentMonth: Date = new Date()
 
