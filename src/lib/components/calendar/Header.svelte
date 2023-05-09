@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { format } from '$lib/utils/date'
 	import { getMonthPath } from '$lib/utils/path'
+	import Arrow from '$lib/components/icon/arrow/Arrow.svelte'
 
 	export let currentMonth: Date = new Date()
 
@@ -26,70 +26,26 @@
 </script>
 
 <header class="justify-between">
-	<h1 class="text-2xl md:text-4xl text-center">{format(currentMonth.toString(), 'yyyy')}</h1>
+	<h1 class="text-2xl md:text-4xl text-center bg-green-600 text-white py-2">
+		{format(currentMonth.toString(), 'yyyy')}
+	</h1>
 	<nav>
 		<ul class="flex justify-between">
 			<li class="">
-				<a class="block py-2" href={previousMonthPath}
-					>{format(previousMonthPath.toString(), 'MMMM')}</a
+				<a
+					class="flex py-2 px-4 items-center capitalize bg-slate-50 rounded"
+					href={previousMonthPath}
+					><Arrow direction="left" />{format(previousMonthPath.toString(), 'MMMM')}</a
 				>
 			</li>
-			<li class="block py-2" aria-current="page">
-				<a href={currentMonthPath}>{format(currentMonthPath.toString(), 'MMMM')}</a>
+			<li class="flex items-center bg-slate-100 capitalize px-4" aria-current="page">
+				{format(currentMonthPath.toString(), 'MMMM')}
 			</li>
-			<li class="block py-2">
-				<a href={nextMonthPath}>{format(nextMonthPath.toString(), 'MMMM')}</a>
+			<li>
+				<a class="flex py-2 px-4 items-center capitalize bg-slate-50 rounded" href={nextMonthPath}
+					>{format(nextMonthPath.toString(), 'MMMM')}<Arrow direction="right" /></a
+				>
 			</li>
 		</ul>
 	</nav>
 </header>
-
-<style>
-	/* ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
-
-	li {
-		position: relative;
-		height: 100%;
-	}
-
-	li[aria-current='page']::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
-	}
-
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 0.5rem;
-		color: var(--color-text);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
-
-	a:hover {
-		color: var(--color-theme-1);
-	} */
-</style>
