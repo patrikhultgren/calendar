@@ -65,7 +65,7 @@
 					{#each month.weeks as week}
 						<tr>
 							<td class="text-center border border-gray-300 font-bold sm:text-xl bg-gray-100"
-								>{week[0].week}</td
+								>{week[0].week.toString().padStart(2, '0')}</td
 							>
 							{#each week as day}
 								<td
@@ -104,34 +104,42 @@
 				</tbody>
 			</table>
 		{/if}
-		{#if month.days}
-			<ul class="mt-8">
-				{#each month.days as day}
-					<li
-						class={classNames(
-							{ 'bg-red-200': day.isRedDay },
-							format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
-								? 'border-2 border-gray-500'
-								: 'border-x border-t border-gray-300 last:border-b',
-							'py-2',
-							'px-4'
-						)}
-					>
-						<div class="font-bold text-xl capitalize">
-							{format(day.date, 'd')}
-							<span class="text-gray-700">
-								{format(day.date, 'iiii')}
-							</span>
-						</div>
-						{#if day.flagDay}
-							<div class="text-red-600 font-bold">{day.flagDay}</div>
-						{/if}
-						{#if day.names.length}
-							<div class="text-sm">{day.names.join(' • ')}</div>
-						{/if}
-					</li>
-				{/each}
-			</ul>
+		{#if month.weeks}
+			{#each month.weeks as week}
+				<article>
+					<h2 class="px-4 py-2 border border-gray-300 font-bold sm:text-xl bg-gray-50 mt-8">
+						Vecka {week[0].week}
+					</h2>
+					<ul>
+						{#each week as day}
+							<li
+								class={classNames(
+									{ 'bg-red-200': day.isRedDay },
+									{
+										'bg-gray-100': !day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
+									},
+									format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
+										? 'border-2 border-gray-500'
+										: 'border-x border-t border-gray-300 last:border-b',
+									'py-2',
+									'px-4',
+									'hover:bg-gray-200'
+								)}
+							>
+								<div class="font-bold text-xl capitalize flex">
+									{format(day.date, 'iiii, d MMM')}
+								</div>
+								{#if day.flagDay}
+									<div class="text-red-600 font-bold">{day.flagDay}</div>
+								{/if}
+								{#if day.names.length}
+									<div class="text-sm">{day.names.join(' • ')}</div>
+								{/if}
+							</li>
+						{/each}
+					</ul>
+				</article>
+			{/each}
 		{/if}
 	</main>
 </Container>

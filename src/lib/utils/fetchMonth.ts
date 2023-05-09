@@ -25,7 +25,6 @@ export type ICalendarDay = {
 export interface IMonth {
 	date: Date | null
 	weeks: Array<Array<ICalendarDay>> | null
-	days: Array<ICalendarDay> | null
 	loading: boolean
 	error: any
 }
@@ -92,8 +91,7 @@ const fetchMonth = async (currentMonth: Date): Promise<IMonth> => {
 
 		return {
 			...initialState,
-			weeks: transformIntoWeeks(monthAndNearbyDays),
-			days: currentDays
+			weeks: transformIntoWeeks(monthAndNearbyDays)
 		}
 	} catch (error) {
 		return {
