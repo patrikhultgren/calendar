@@ -41,7 +41,7 @@
 </svelte:head>
 
 <Header {currentMonth} />
-<Container className="pt-[4.5rem] pb-8">
+<Container className="pb-8">
 	<main>
 		{#if month.loading}<div>Laddar...</div>{/if}
 		{#if month.error}<div class="p-4 bg-red-100 mx-4 sm:mx-0" role="alert">
@@ -85,8 +85,11 @@
 									)}
 								>
 									<div class="sm:min-h-[100px]">
-										<div class="font-bold text-base text-center sm:text-left">
+										<div class="block font-bold text-base text-center sm:text-left sm:hidden">
 											{format(day.date, 'd')}
+										</div>
+										<div class="hidden font-bold text-base text-center sm:text-left sm:block">
+											{format(day.date, day.date.getDate() === 1 ? 'd MMMM' : 'd')}
 										</div>
 										<div class="hidden sm:block">
 											{#if day.flagDay}
