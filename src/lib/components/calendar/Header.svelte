@@ -6,8 +6,8 @@
 
 	export let currentMonth: Date = new Date()
 
-	let previousMonth: Date = new Date()
-	let nextMonth: Date = new Date()
+	let previousMonth: Date = new Date(currentMonth.getTime())
+	let nextMonth: Date = new Date(currentMonth.getTime())
 
 	$: {
 		let date = new Date(currentMonth.getTime())
