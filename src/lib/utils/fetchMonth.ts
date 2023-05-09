@@ -13,34 +13,41 @@ export type IDay = {
 }
 
 export interface IMonth {
-	weeks: Array<Array<IDay>>
-	days: Array<IDay>
+	weeks: Array<Array<IDay>> | null
+	days: Array<IDay> | null
+	loading: boolean
+	error: any
 }
 
-// monthAndNearbyDays -> weeks
-// currentMonthOnly -> days
-const fetchMonth = async (year: number, month: number): Promise<IMonth | null> => {
+export const initialState = {
+	weeks: null,
+	days: null,
+	loading: false,
+	error: null
+}
+
+const fetchMonth = async (year: number, month: number): Promise<IMonth> => {
 	let monthAndNearbyDays: Array<any> = []
 
 	const date = new Date(year, month)
 
-	let previousMonth = new Date(date.getTime())
+	let previousMonth = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 	previousMonth.setMonth(date.getMonth() - 1)
 
-	let currentMonth = new Date(date.getTime())
+	let currentMonth = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 
-	let nextMonth = new Date(date.getTime())
+	let nextMonth = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 	nextMonth.setMonth(date.getMonth() + 1)
 
-	const months = [previousMonth, currentMonth, nextMonth]
+	const monthDates = [previousMonth, currentMonth, nextMonth]
 
 	try {
 		const promises = []
 
-		for (const month of months) {
+		for (const monthDate of monthDates) {
 			promises.push(
 				request({
-					endpoint: endpoints.getMonthUrl(month.getFullYear(), month.getMonth())
+					endpoint: endpoints.getMonthUrl(monthDate.getFullYear(), monthDate.getMonth() + 1)
 				})
 			)
 		}
@@ -49,7 +56,10 @@ const fetchMonth = async (year: number, month: number): Promise<IMonth | null> =
 
 		for (const result of results) {
 			if (result.status === 'rejected') {
-				return null
+				return {
+					...initialState,
+					error: new Error('Failed to fetch')
+				}
 			}
 		}
 
@@ -59,34 +69,25 @@ const fetchMonth = async (year: number, month: number): Promise<IMonth | null> =
 		const lastWeek = currentDays[currentDays.length - 1].vecka
 
 		monthAndNearbyDays = [
-			...results[0].value.dagar.filter((day: any) => day.vecka === firstWeek),
+			...results[0].value.dagar.filter((day: IDay) => day.vecka === firstWeek),
 			...currentDays,
-			...results[2].value.dagar.filter((day: any) => day.vecka === lastWeek)
+			...results[2].value.dagar.filter((day: IDay) => day.vecka === lastWeek)
 		]
 
-		return { weeks: transformMonthAndNearbyDaysIntoWeeks(monthAndNearbyDays), days: currentDays }
-
-		// setResult({
-		// 	response: transformResponse ? transformResponse(response) : response,
-		// 	loading: false,
-		// 	finished: true,
-		// 	error: null
-		// })
+		return {
+			...initialState,
+			weeks: transformIntoWeeks(monthAndNearbyDays),
+			days: currentDays
+		}
 	} catch (error) {
-		// setResult({
-		// 	response: null,
-		// 	loading: false,
-		// 	finished: true,
-		// 	error
-		// })
+		return {
+			...initialState,
+			error
+		}
 	}
-
-	return null
 }
 
-const transformMonthAndNearbyDaysIntoWeeks = (
-	monthAndNearbyDays: Array<IDay>
-): Array<Array<IDay>> => {
+const transformIntoWeeks = (monthAndNearbyDays: Array<IDay>): Array<Array<IDay>> => {
 	let weeks: Array<Array<IDay>> = []
 	let weekIndex = 0
 
