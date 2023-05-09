@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { format } from '$lib/utils/date'
 	import { getMonthPath } from '$lib/utils/path'
+	import Container from '$lib/components/Container.svelte'
 	import Arrow from '$lib/components/icon/Arrow.svelte'
 
 	export let currentMonth: Date = new Date()
@@ -26,26 +27,29 @@
 </script>
 
 <header class="justify-between">
-	<h1 class="text-2xl md:text-4xl text-center bg-green-600 text-white py-2">
-		{format(currentMonth.toString(), 'yyyy')}
-	</h1>
-	<nav>
-		<ul class="flex justify-between">
-			<li class="">
-				<a
-					class="flex py-2 px-4 items-center capitalize bg-slate-50 rounded"
-					href={previousMonthPath}
-					><Arrow direction="left" />{format(previousMonthPath.toString(), 'MMMM')}</a
+	<Container>
+		<nav>
+			<ul class="flex justify-between">
+				<li class="">
+					<a
+						class="flex py-2 px-4 items-center capitalize bg-slate-50a rounded text-xl font-bold"
+						href={previousMonthPath}
+						><Arrow direction="left" />{format(previousMonthPath, 'MMMM')}</a
+					>
+				</li>
+				<li
+					class="flex items-center bg-slate-100a capitalize px-4 text-3xl font-bold"
+					aria-current="page"
 				>
-			</li>
-			<li class="flex items-center bg-slate-100 capitalize px-4" aria-current="page">
-				{format(currentMonthPath.toString(), 'MMMM')}
-			</li>
-			<li>
-				<a class="flex py-2 px-4 items-center capitalize bg-slate-50 rounded" href={nextMonthPath}
-					>{format(nextMonthPath.toString(), 'MMMM')}<Arrow direction="right" /></a
-				>
-			</li>
-		</ul>
-	</nav>
+					{format(currentMonthPath, 'MMMM yyyy')}
+				</li>
+				<li>
+					<a
+						class="flex py-2 px-4 items-center capitalize bg-slate-50a rounded text-xl font-bold"
+						href={nextMonthPath}>{format(nextMonthPath, 'MMMM')}<Arrow direction="right" /></a
+					>
+				</li>
+			</ul>
+		</nav>
+	</Container>
 </header>
