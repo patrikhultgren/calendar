@@ -5,15 +5,22 @@
 	import Container from '$lib/components/utils/Container.svelte'
 	import Error from '$lib/components/utils/Error.svelte'
 	import mounted from '$lib/utils/mounted'
+	import { months } from '$lib/config'
 	import callOnVisibilityChange from '$lib/utils/callOnVisibilityChange'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 	import Header from './Header.svelte'
 	import Table from './Table.svelte'
 	import Weeks from './Weeks.svelte'
 
+	export let data
+
 	let now = new Date()
 
-	export let currentMonth = new Date(now.getTime())
+	$: currentMonth = new Date(
+		data.props.year && data.props.month
+			? `${data.props.year}-${months.indexOf(data.props.month) + 1}`
+			: now.getTime()
+	)
 
 	let month: IMonth = { ...initialState }
 
