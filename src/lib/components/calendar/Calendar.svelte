@@ -8,7 +8,6 @@
 	import callOnVisibilityChange from '$lib/utils/callOnVisibilityChange'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 	import Header from './Header.svelte'
-	import Footer from './Footer.svelte'
 	import Table from './Table.svelte'
 	import Weeks from './Weeks.svelte'
 
@@ -45,7 +44,7 @@
 </svelte:head>
 
 <Header {currentMonth} {now} />
-<Container className="pb-[5rem] sm:pb-8">
+<Container>
 	<main>
 		{#if month.loading}
 			<Placeholder className="w-full h-[16rem] sm:h-[39rem]" />
@@ -65,5 +64,4 @@
 		{/if}
 		<ScrollToTopButton />
 	</main>
-	<Footer />
 </Container>
