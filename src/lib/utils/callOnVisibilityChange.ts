@@ -8,7 +8,6 @@ const callOnVisibilityChange = (callback: any) => {
 
 	onDestroy(() => {
 		if (browser) {
-			console.log('remove')
 			document.removeEventListener('visibilitychange', callback)
 		}
 	})
