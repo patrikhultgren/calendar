@@ -32,7 +32,7 @@
 	<meta name="description" content="Kalender med veckonummer och röda dagar." />
 </svelte:head>
 
-<Header {currentMonth} />
+<Header {currentMonth} {now} />
 <Container className="pb-8">
 	<main>
 		{#if month.loading}

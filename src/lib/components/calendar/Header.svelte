@@ -4,6 +4,7 @@
 	import Container from '$lib/components/utils/Container.svelte'
 	import Arrow from '$lib/components/icon/Arrow.svelte'
 
+	export let now = new Date()
 	export let currentMonth: Date = new Date()
 
 	let previousMonth: Date = new Date(currentMonth.getTime())
@@ -21,8 +22,8 @@
 		nextMonth = date
 	}
 
-	$: previousMonthPath = getMonthPath(previousMonth)
-	$: nextMonthPath = getMonthPath(nextMonth)
+	$: previousMonthPath = getMonthPath(previousMonth, now)
+	$: nextMonthPath = getMonthPath(nextMonth, now)
 </script>
 
 <header>
