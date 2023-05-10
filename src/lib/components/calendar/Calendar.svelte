@@ -8,6 +8,7 @@
 	import mounted from '$lib/utils/mounted'
 	import { months } from '$lib/config'
 	import callOnVisibilityChange from '$lib/utils/callOnVisibilityChange'
+	import { padValue } from '$lib/utils/number'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 	import Header from './Header.svelte'
 	import Table from './Table.svelte'
@@ -20,7 +21,7 @@
 
 	$: currentMonth = new Date(
 		searchParams && searchParams.get('year') && searchParams.get('month')
-			? `${searchParams.get('year')}-${months.indexOf(searchParams.get('month')) + 1}`
+			? `${searchParams.get('year')}-${padValue(months.indexOf(searchParams.get('month')) + 1)}-01`
 			: now.getTime()
 	)
 
