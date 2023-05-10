@@ -5,6 +5,7 @@
 	import Container from '$lib/components/utils/Container.svelte'
 	import Error from '$lib/components/utils/Error.svelte'
 	import mounted from '$lib/utils/mounted'
+	import callOnVisibilityChange from '$lib/utils/callOnVisibilityChange'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 	import Header from './Header.svelte'
 	import Table from './Table.svelte'
@@ -25,6 +26,16 @@
 			})
 		}
 	}
+
+	function onVisibilityChange() {
+		const state = document.visibilityState
+
+		if (state === 'visible') {
+			month = month
+		}
+	}
+
+	callOnVisibilityChange(onVisibilityChange)
 </script>
 
 <svelte:head>

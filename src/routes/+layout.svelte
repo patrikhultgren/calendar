@@ -4,19 +4,19 @@
 	import { page } from '$app/stores'
 	import { onMount, onDestroy } from 'svelte'
 
-	function onVisibilityChange() {
-		window.location.reload()
-	}
+	// function onVisibilityChange() {
+	// 	window.location.reload()
+	// }
 
-	onMount(() => {
-		document.addEventListener('visibilitychange', onVisibilityChange)
-	})
+	// onMount(() => {
+	// 	document.addEventListener('visibilitychange', onVisibilityChange)
+	// })
 
-	onDestroy(() => {
-		if (browser) {
-			document.removeEventListener('visibilitychange', onVisibilityChange)
-		}
-	})
+	// onDestroy(() => {
+	// 	if (browser) {
+	// 		document.removeEventListener('visibilitychange', onVisibilityChange)
+	// 	}
+	// })
 </script>
 
 <slot />
