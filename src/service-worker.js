@@ -14,6 +14,7 @@ self.addEventListener('install', (event) => {
 	async function addFilesToCache() {
 		const cache = await caches.open(CACHE)
 		await cache.addAll(ASSETS)
+		self.skipWaiting()
 	}
 
 	event.waitUntil(addFilesToCache())
@@ -49,7 +50,7 @@ self.addEventListener('fetch', (event) => {
 		}
 
 		// Try get response from cache before fetch
-		const responseFromCache = await cache.match(url.pathname)
+		const responseFromCache = await cache.match(event.request)
 
 		if (responseFromCache) {
 			return responseFromCache
@@ -70,10 +71,4 @@ self.addEventListener('fetch', (event) => {
 	}
 
 	event.respondWith(respond())
-})
-
-self.addEventListener('message', (event) => {
-	if (event.data && event.data.type === 'SKIP_WAITING') {
-		self.skipWaiting()
-	}
 })
