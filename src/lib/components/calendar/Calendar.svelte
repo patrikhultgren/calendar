@@ -1,6 +1,7 @@
 <script lang="ts">
 	import classNames from 'classnames'
 	import Header from './Header.svelte'
+	import ScrollToTopButton from './ScrollToTopButton.svelte'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
 	import Container from '$lib/components/layout/Container.svelte'
 	import mounted from '$lib/utils/mounted'
@@ -44,8 +45,11 @@
 <Container className="pb-8">
 	<main>
 		{#if month.loading}<div>Laddar...</div>{/if}
-		{#if month.error}<div class="p-4 bg-red-100 mx-4 sm:mx-0" role="alert">
-				Ett fel uppstod. Försök igen senare...
+		{#if month.error}
+			<div class="pt-8">
+				<div class="p-4 bg-red-100 mx-4 sm:mx-0" role="alert">
+					Ett fel uppstod. Försök igen senare...
+				</div>
 			</div>
 		{/if}
 		{#if month.weeks}
@@ -149,5 +153,6 @@
 				</article>
 			{/each}
 		{/if}
+		<ScrollToTopButton />
 	</main>
 </Container>
