@@ -71,6 +71,14 @@
 									<div class="text-sm text-red-600 font-bold break-words">
 										{day.flagDay}
 									</div>
+								{:else if day.holiday}
+									<div class="text-sm text-red-600 font-bold break-words">
+										{day.holiday}
+									</div>
+								{:else if day.holidayEvening}
+									<div class="text-sm text-red-600 font-bold break-words">
+										{day.holidayEvening}
+									</div>
 								{/if}
 								{#if day.names.length}
 									<div class="text-sm">{day.names.join(', ')}</div>

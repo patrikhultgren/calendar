@@ -44,6 +44,10 @@
 					</div>
 					{#if day.flagDay}
 						<div class="text-red-600 font-bold">{day.flagDay}</div>
+					{:else if day.holiday}
+						<div class="text-red-600 font-bold">{day.holiday}</div>
+					{:else if day.holidayEvening}
+						<div class="text-red-600 font-bold">{day.holidayEvening}</div>
 					{/if}
 					{#if day.names.length}
 						<div class="text-sm">{day.names.join(' • ')}</div>

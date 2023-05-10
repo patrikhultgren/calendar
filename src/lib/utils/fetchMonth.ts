@@ -10,6 +10,8 @@ type IFaboulDay = {
 	'dag i vecka': string
 	namnsdag: Array<string>
 	flaggdag: string
+	helgdag?: string
+	helgdagsafton?: string
 }
 
 export type ICalendarDay = {
@@ -20,6 +22,8 @@ export type ICalendarDay = {
 	isRedDay: boolean
 	flagDay: string
 	names: Array<string>
+	holiday: string
+	holidayEvening: string
 }
 
 export interface IMonth {
@@ -109,7 +113,9 @@ const transformDays = (days: Array<IFaboulDay>): Array<ICalendarDay> =>
 		isNonWorkingDay: day['arbetsfri dag'] === 'Ja',
 		isRedDay: day['röd dag'] === 'Ja',
 		flagDay: day.flaggdag,
-		names: day.namnsdag
+		names: day.namnsdag,
+		holiday: day.helgdag || '',
+		holidayEvening: day.helgdagsafton || ''
 	}))
 
 const transformIntoWeeks = (
