@@ -5,6 +5,7 @@
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
 	import Placeholder from '$lib/components/status/Placeholder.svelte'
 	import Container from '$lib/components/layout/Container.svelte'
+	import SwedishFlag from '$lib/components/icon/SwedishFlag.svelte'
 	import mounted from '$lib/utils/mounted'
 	import { format } from '$lib/utils/date'
 	import type { IMonth } from '$lib/utils/fetchMonth'
@@ -99,8 +100,13 @@
 										<div class="block font-bold text-base text-center sm:text-left sm:hidden">
 											{format(day.date, 'd')}
 										</div>
-										<div class="hidden font-bold text-base text-center sm:text-left sm:block">
-											{format(day.date, day.date.getDate() === 1 ? 'd MMMM' : 'd')}
+										<div class="hidden sm:flex">
+											<div class="font-bold text-base text-center sm:text-left">
+												{format(day.date, day.date.getDate() === 1 ? 'd MMMM' : 'd')}
+											</div>
+											{#if day.flagDay}
+												<SwedishFlag className="w-6 h-4 ml-auto rounded bg-red-900" />
+											{/if}
 										</div>
 										<div class="hidden sm:block">
 											{#if day.flagDay}
@@ -145,15 +151,22 @@
 									''
 								)}
 							>
-								<div class="font-bold sm:text-xl capitalize flex">
-									{format(day.date, 'iiii, d MMM')}
+								<div class="flex items-centera">
+									<div>
+										<div class="font-bold sm:text-xl capitalize flex">
+											{format(day.date, 'iiii, d MMM')}
+										</div>
+										{#if day.flagDay}
+											<div class="text-red-600 font-bold">{day.flagDay}</div>
+										{/if}
+										{#if day.names.length}
+											<div class="text-sm">{day.names.join(' • ')}</div>
+										{/if}
+									</div>
+									{#if day.flagDay}
+										<SwedishFlag className="mt-2 w-6 h-4 ml-4 rounded bg-red-900" />
+									{/if}
 								</div>
-								{#if day.flagDay}
-									<div class="text-red-600 font-bold">{day.flagDay}</div>
-								{/if}
-								{#if day.names.length}
-									<div class="text-sm">{day.names.join(' • ')}</div>
-								{/if}
 							</li>
 						{/each}
 					</ul>
