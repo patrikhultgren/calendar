@@ -1,4 +1,4 @@
-export const MONTHS: Array<string> = [
+export const months: Array<string> = [
 	'januari',
 	'februari',
 	'mars',
