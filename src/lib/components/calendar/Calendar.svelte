@@ -151,22 +151,22 @@
 									''
 								)}
 							>
-								<div class="flex items-centera">
+								<div class="flex items-center">
 									<div>
 										<div class="font-bold sm:text-xl capitalize flex">
 											{format(day.date, 'iiii, d MMM')}
 										</div>
-										{#if day.flagDay}
-											<div class="text-red-600 font-bold">{day.flagDay}</div>
-										{/if}
-										{#if day.names.length}
-											<div class="text-sm">{day.names.join(' • ')}</div>
-										{/if}
 									</div>
 									{#if day.flagDay}
-										<SwedishFlag className="mt-2 w-6 h-4 ml-4 rounded bg-red-900" />
+										<SwedishFlag className="w-6 h-4 ml-4 rounded bg-red-900" />
 									{/if}
 								</div>
+								{#if day.flagDay}
+									<div class="text-red-600 font-bold">{day.flagDay}</div>
+								{/if}
+								{#if day.names.length}
+									<div class="text-sm">{day.names.join(' • ')}</div>
+								{/if}
 							</li>
 						{/each}
 					</ul>
