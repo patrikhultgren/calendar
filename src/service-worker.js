@@ -23,7 +23,9 @@ self.addEventListener('activate', (event) => {
 	// Remove previous cached data from disk
 	async function deleteOldCaches() {
 		for (const key of await caches.keys()) {
-			if (key !== CACHE) await caches.delete(key)
+			if (key !== CACHE) {
+				await caches.delete(key)
+			}
 		}
 	}
 
