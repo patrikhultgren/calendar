@@ -8,7 +8,7 @@ export const format = (value: string | Date, dateFormat: string) => {
 		date = new Date(value)
 	}
 
-	if (date instanceof Date && typeof date.getMonth === 'function') {
+	if (date instanceof Date && !isNaN(date as any)) {
 		return dateFnsFormat(date, dateFormat, { locale: sv })
 	}
 
