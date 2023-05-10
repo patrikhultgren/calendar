@@ -1,5 +1,5 @@
 import { format as dateFnsFormat } from 'date-fns'
-import sv from 'date-fns/locale/sv'
+import sv from 'date-fns/locale/sv/index.js'
 
 export const format = (value: string | Date, dateFormat: string) => {
 	let date = value
