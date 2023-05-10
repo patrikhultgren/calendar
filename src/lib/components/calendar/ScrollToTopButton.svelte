@@ -31,6 +31,7 @@
 		'duration-300',
 		'flex',
 		'w-full',
+		'z-10',
 		toggleClass
 	)}
 >

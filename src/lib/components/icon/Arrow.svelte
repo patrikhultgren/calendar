@@ -6,7 +6,7 @@
 	export let direction: 'left' | 'right' | 'up' | 'down' = 'right'
 </script>
 
-<div class="w-8 h-8">
+<div class="w-6 h-6">
 	{#if direction === 'left'}
 		<IoIosArrowRoundBack title="Pil vänster" />
 	{:else if direction === 'right'}
