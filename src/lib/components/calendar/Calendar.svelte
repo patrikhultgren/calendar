@@ -3,6 +3,7 @@
 	import Header from './Header.svelte'
 	import ScrollToTopButton from './ScrollToTopButton.svelte'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
+	import Placeholder from '$lib/components/status/Placeholder.svelte'
 	import Container from '$lib/components/layout/Container.svelte'
 	import mounted from '$lib/utils/mounted'
 	import { format } from '$lib/utils/date'
@@ -44,7 +45,13 @@
 <Header {currentMonth} />
 <Container className="pb-8">
 	<main>
-		{#if month.loading}<div>Laddar...</div>{/if}
+		{#if month.loading}
+			<Placeholder className="w-full h-[16rem] sm:h-[39rem]" />
+			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
+			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
+			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
+			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
+		{/if}
 		{#if month.error}
 			<div class="pt-8">
 				<div class="p-4 bg-red-100 mx-4 sm:mx-0" role="alert">
