@@ -1,18 +1,18 @@
 <script lang="ts">
-	import classNames from 'classnames'
-	import Header from './Header.svelte'
 	import ScrollToTopButton from './ScrollToTopButton.svelte'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
-	import Placeholder from '$lib/components/status/Placeholder.svelte'
+	import Placeholder from '$lib/components/utils/Placeholder.svelte'
 	import Container from '$lib/components/layout/Container.svelte'
-	import SwedishFlag from '$lib/components/icon/SwedishFlag.svelte'
+	import Error from '$lib/components/utils/Error.svelte'
 	import mounted from '$lib/utils/mounted'
-	import { format } from '$lib/utils/date'
 	import type { IMonth } from '$lib/utils/fetchMonth'
+	import Header from './Header.svelte'
+	import Table from './Table.svelte'
+	import Weeks from './Weeks.svelte'
 
 	let now = new Date()
 
-	export let currentMonth = now
+	export let currentMonth = new Date(now.getTime())
 
 	let month: IMonth = { ...initialState }
 
@@ -25,22 +25,11 @@
 			})
 		}
 	}
-
-	const columns: Array<{ short: string; long: string; class: string }> = [
-		{ short: 'V', long: 'Vecka', class: 'w-[9%] sm:w-[5%]' },
-		{ short: 'Mån', long: 'Måndag', class: 'w-[13%] sm:w-[14%]' },
-		{ short: 'Tis', long: 'Tisdag', class: 'w-[13%] sm:w-[14%]' },
-		{ short: 'Ons', long: 'Onsdag', class: 'w-[13%] sm:w-[14%]' },
-		{ short: 'Tor', long: 'Torsdag', class: 'w-[13%] sm:w-[14%]' },
-		{ short: 'Fre', long: 'Fredag', class: 'w-[13%] sm:w-[13%]' },
-		{ short: 'Lör', long: 'Lördag', class: 'w-[13%] sm:w-[13%]' },
-		{ short: 'Sön', long: 'Söndag', class: 'w-[13%] sm:w-[13%]' }
-	]
 </script>
 
 <svelte:head>
-	<title>Kalender</title>
-	<meta name="description" content="Kalender med veckonummer" />
+	<title>Kalender med veckonummer</title>
+	<meta name="description" content="Kalender med veckonummer och röda dagar." />
 </svelte:head>
 
 <Header {currentMonth} />
@@ -54,124 +43,13 @@
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
 		{/if}
 		{#if month.error}
-			<div class="pt-8">
-				<div class="p-4 bg-red-100 mx-4 sm:mx-0" role="alert">
-					Ett fel uppstod. Försök igen senare...
-				</div>
-			</div>
+			<Error className="pt-8" />
 		{/if}
 		{#if month.weeks}
-			<table class="w-full border-collapse">
-				<thead>
-					<tr class="[&>*]:p-1.5">
-						{#each columns as column}
-							<th class={column.class}
-								><span class="inline sm:hidden">{column.short}</span><span class="hidden sm:inline"
-									>{column.long}</span
-								></th
-							>
-						{/each}
-					</tr>
-				</thead>
-				<tbody>
-					{#each month.weeks as week}
-						<tr>
-							<td class="text-center border border-gray-400 font-bold sm:text-xl bg-gray-100"
-								>{week[0].week.toString().padStart(2, '0')}</td
-							>
-							{#each week as day}
-								<td
-									class={classNames(
-										{
-											'bg-red-200': day.isRedDay
-										},
-										{
-											'bg-gray-100':
-												!day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
-										},
-										format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
-											? 'border-4 border-gray-500'
-											: 'border border-gray-400',
-										'align-top',
-										'p-2'
-									)}
-								>
-									<div class="sm:min-h-[100px]">
-										<div class="block font-bold text-base text-center sm:text-left sm:hidden">
-											{format(day.date, 'd')}
-										</div>
-										<div class="hidden sm:flex">
-											<div class="font-bold text-base text-center sm:text-left">
-												{format(day.date, day.date.getDate() === 1 ? 'd MMMM' : 'd')}
-											</div>
-											{#if day.flagDay}
-												<SwedishFlag className="w-6 h-4 ml-auto rounded bg-red-900" />
-											{/if}
-										</div>
-										<div class="hidden sm:block">
-											{#if day.flagDay}
-												<div class="text-sm text-red-600 font-bold break-words">
-													{day.flagDay}
-												</div>
-											{/if}
-											{#if day.names.length}
-												<div class="text-sm">{day.names.join(', ')}</div>
-											{/if}
-										</div>
-									</div>
-								</td>
-							{/each}
-						</tr>
-					{/each}
-				</tbody>
-			</table>
+			<Table weeks={month.weeks} {currentMonth} {now} />
 		{/if}
 		{#if month.weeks}
-			{#each month.weeks as week}
-				<article>
-					<h2
-						class="px-4 py-2 border border-gray-400 font-bold sm:text-xl bg-gray-50 mt-8 text-xl sm:text-2xl"
-					>
-						Vecka {week[0].week}
-					</h2>
-					<ul>
-						{#each week as day}
-							<li
-								class={classNames(
-									day.isRedDay ? 'hover:bg-red-300' : 'hover:bg-gray-200',
-									{ 'bg-red-200': day.isRedDay },
-									{
-										'bg-gray-100': !day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
-									},
-									format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
-										? 'border-4 border-gray-500'
-										: 'border-x border-t border-gray-400 first:border-t-0 last:border-b',
-									'py-2',
-									'px-4',
-									''
-								)}
-							>
-								<div class="flex items-center">
-									<div>
-										<div class="font-bold sm:text-xl capitalize flex">
-											{format(day.date, 'iiii, d MMM')}
-										</div>
-									</div>
-									{#if day.flagDay}
-										<SwedishFlag className="w-6 h-4 ml-4 rounded bg-red-900" />
-									{/if}
-								</div>
-								{#if day.flagDay}
-									<div class="text-red-600 font-bold">{day.flagDay}</div>
-								{/if}
-								{#if day.names.length}
-									<div class="text-sm">{day.names.join(' • ')}</div>
-								{/if}
-							</li>
-						{/each}
-					</ul>
-				</article>
-			{/each}
+			<Weeks weeks={month.weeks} {currentMonth} {now} />
 		{/if}
 		<ScrollToTopButton />
 	</main>
