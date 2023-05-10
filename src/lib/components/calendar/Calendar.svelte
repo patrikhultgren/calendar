@@ -1,5 +1,6 @@
 <script lang="ts">
-	import ScrollToTopButton from './ScrollToTopButton.svelte'
+	import { browser } from '$app/environment'
+	import { page } from '$app/stores'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
 	import Placeholder from '$lib/components/utils/Placeholder.svelte'
 	import Container from '$lib/components/utils/Container.svelte'
@@ -11,14 +12,15 @@
 	import Header from './Header.svelte'
 	import Table from './Table.svelte'
 	import Weeks from './Weeks.svelte'
+	import ScrollToTopButton from './ScrollToTopButton.svelte'
 
-	export let data
+	$: searchParams = browser && $page.url.searchParams
 
-	let now = new Date()
+	$: now = new Date()
 
 	$: currentMonth = new Date(
-		data.props.year && data.props.month
-			? `${data.props.year}-${months.indexOf(data.props.month) + 1}`
+		searchParams && searchParams.get('year') && searchParams.get('month')
+			? `${searchParams.get('year')}-${months.indexOf(searchParams.get('month')) + 1}`
 			: now.getTime()
 	)
 
