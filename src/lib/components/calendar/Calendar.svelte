@@ -41,7 +41,7 @@
 		const state = document.visibilityState
 
 		if (state === 'visible') {
-			month = month
+			window.location.reload()
 		}
 	}
 
