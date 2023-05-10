@@ -31,7 +31,7 @@ self.addEventListener('activate', (event) => {
 })
 
 self.addEventListener('fetch', (event) => {
-	// ignore POST requests etc
+	// Ignore POST requests etc
 	if (event.request.method !== 'GET') {
 		return
 	}
@@ -52,7 +52,7 @@ self.addEventListener('fetch', (event) => {
 			return responseFromCache
 		}
 
-		// Nothing in cache, let try fetch
+		// Nothing in cache, let's try fetch
 		try {
 			const response = await fetch(event.request)
 
