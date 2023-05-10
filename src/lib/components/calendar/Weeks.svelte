@@ -29,8 +29,7 @@
 							? 'border-4 border-gray-500'
 							: 'border-x border-t border-gray-400 first:border-t-0 last:border-b',
 						'py-2',
-						'px-4',
-						''
+						'px-4'
 					)}
 				>
 					<div class="flex items-center">
