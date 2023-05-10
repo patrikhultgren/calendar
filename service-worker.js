@@ -1,18 +1,18 @@
 const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), l = [
-  a + "/_app/immutable/entry/app.daa79cd6.js",
+  a + "/_app/immutable/entry/app.01098f9a.js",
   a + "/_app/immutable/assets/0.a5c7ca8b.css",
   a + "/_app/immutable/nodes/0.1e254c85.js",
   a + "/_app/immutable/assets/sofiapro-light-webfont.44cf56d3.woff2",
   a + "/_app/immutable/assets/sofiapro-light-webfont.e8624630.woff",
-  a + "/_app/immutable/nodes/1.8188c2ed.js",
-  a + "/_app/immutable/nodes/2.fbae9517.js",
+  a + "/_app/immutable/nodes/1.0fad0af7.js",
+  a + "/_app/immutable/nodes/2.6284fc48.js",
   a + "/_app/immutable/assets/Container.6bf551a2.css",
   a + "/_app/immutable/chunks/Container.3ff5fd01.js",
   a + "/_app/immutable/chunks/index.dc607d88.js",
-  a + "/_app/immutable/chunks/singletons.b21c72b2.js",
-  a + "/_app/immutable/chunks/stores.31f8e497.js",
-  a + "/_app/immutable/entry/start.385e7dfc.js"
-], d = [
+  a + "/_app/immutable/chunks/singletons.2d117f72.js",
+  a + "/_app/immutable/chunks/stores.56fc6216.js",
+  a + "/_app/immutable/entry/start.9f9cc178.js"
+], f = [
   a + "/.nojekyll",
   a + "/android-chrome-192x192.png",
   a + "/android-chrome-512x512.png",
@@ -29,15 +29,15 @@ const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), l
   a + "/favicon.ico",
   a + "/robots.txt",
   a + "/site.webmanifest"
-], r = "1683741420156", c = `cache-${r}`, p = [
+], r = "1683742213426", c = `cache-${r}`, p = [
   ...l,
   // the app itself
-  ...d
+  ...f
   // everything in `static`
 ];
 self.addEventListener("install", (e) => {
   async function t() {
-    await (await caches.open(c)).addAll(p);
+    await (await caches.open(c)).addAll(p), self.skipWaiting();
   }
   e.waitUntil(t());
 });
@@ -55,7 +55,7 @@ self.addEventListener("fetch", (e) => {
     const s = new URL(e.request.url), n = await caches.open(c);
     if (p.includes(s.pathname))
       return n.match(s.pathname);
-    const o = await n.match(s.pathname);
+    const o = await n.match(e.request);
     if (o)
       return o;
     try {
@@ -66,7 +66,4 @@ self.addEventListener("fetch", (e) => {
     return null;
   }
   e.respondWith(t());
-});
-self.addEventListener("message", (e) => {
-  e.data && e.data.type === "SKIP_WAITING" && self.skipWaiting();
 });
