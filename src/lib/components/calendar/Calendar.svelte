@@ -2,7 +2,7 @@
 	import ScrollToTopButton from './ScrollToTopButton.svelte'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
 	import Placeholder from '$lib/components/utils/Placeholder.svelte'
-	import Container from '$lib/components/layout/Container.svelte'
+	import Container from '$lib/components/utils/Container.svelte'
 	import Error from '$lib/components/utils/Error.svelte'
 	import mounted from '$lib/utils/mounted'
 	import type { IMonth } from '$lib/utils/fetchMonth'
