@@ -32,7 +32,7 @@
 				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"
 				href={previousMonthPath}><Arrow direction="left" />{format(previousMonth, 'MMMM')}</a
 			>
-			<h1 class="flex items-center capitalize px-4 text-2xl sm:text-3xl font-bold">
+			<h1 class="flex items-center capitalize px-4 text-2xl sm:text-4xl font-bold">
 				<span class="inline sm:hidden">{format(currentMonth, 'MMM yyyy').replace('.', '')}</span>
 				<span class="hidden sm:inline">{format(currentMonth, 'MMMM yyyy')}</span>
 			</h1>
