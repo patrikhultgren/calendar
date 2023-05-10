@@ -39,6 +39,6 @@
 		on:click={goToTop}
 		aria-label="Gå till toppen av sidan"
 		type="button"
-		class="p-2 bg-white mx-auto border border-gray-300 shadow"><Arrow direction="up" /></button
+		class="p-3 bg-white mx-auto border border-gray-300 shadow"><Arrow direction="up" /></button
 	>
 </div>
