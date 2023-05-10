@@ -20,7 +20,6 @@
 			{#each week as day}
 				<li
 					class={classNames(
-						day.isRedDay ? 'hover:bg-red-300' : 'hover:bg-gray-200',
 						{ 'bg-red-200': day.isRedDay },
 						{
 							'bg-gray-100': !day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
@@ -39,7 +38,7 @@
 							</div>
 						</div>
 						{#if day.flagDay}
-							<SwedishFlag className="w-6 h-4 ml-4 rounded bg-red-900" />
+							<SwedishFlag className="w-6 h-4 ml-4 rounded" />
 						{/if}
 					</div>
 					{#if day.flagDay}
