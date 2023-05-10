@@ -27,7 +27,8 @@ self.addEventListener('activate', (event) => {
 		}
 	}
 
-	event.waitUntil(deleteOldCaches())
+	// The claim should remove the need of reloading the page before the new service worker is activated
+	event.waitUntil(Promise.allSettled(deleteOldCaches(), clients.claim()))
 })
 
 self.addEventListener('fetch', (event) => {
