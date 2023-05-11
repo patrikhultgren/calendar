@@ -1,7 +1,8 @@
 <script>
 	import '$lib/css/style.css'
+	import { onMount } from 'svelte'
 	import onInterval from '$lib/utils/onInterval'
-	import { online } from '$lib/stores'
+	import { online, isFullscreen } from '$lib/stores'
 	import Footer from './Footer.svelte'
 
 	function setOnline() {
@@ -9,6 +10,10 @@
 	}
 
 	onInterval(setOnline, 1000)
+
+	onMount(() => {
+		isFullscreen.set(window.matchMedia('(display-mode: fullscreen)').matches)
+	})
 </script>
 
 <slot />

@@ -1,15 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import classNames from 'classnames'
+	import { isFullscreen } from '$lib/stores'
 	import Arrow from '$lib/components/icon/Arrow.svelte'
 
-	let isFullscreen = false
-
-	onMount(() => {
-		isFullscreen = window.matchMedia('(display-mode: fullscreen)').matches
-	})
-
-	$: showClass = isFullscreen ? 'bottom-8' : 'bottom-4'
+	$: showClass = $isFullscreen ? 'bottom-8' : 'bottom-4'
 	const hideClass = '-bottom-[4rem]'
 
 	let toggleClass = 'show'
