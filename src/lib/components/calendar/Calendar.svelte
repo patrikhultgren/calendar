@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
+	import { getMonthPath } from '$lib/utils/path'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
 	import Placeholder from '$lib/components/utils/Placeholder.svelte'
 	import Container from '$lib/components/utils/Container.svelte'
@@ -15,7 +16,7 @@
 	import Table from './Table.svelte'
 	import Weeks from './Weeks.svelte'
 	import Offline from './Offline.svelte'
-	import ScrollToTopButton from './ScrollToTopButton.svelte'
+	import MobileNav from './MobileNav.svelte'
 
 	$: searchParams = browser && $page.url.searchParams
 
@@ -39,6 +40,24 @@
 		}
 	}
 
+	$: previousMonth = new Date(currentMonth.getTime())
+	$: nextMonth = new Date(currentMonth.getTime())
+
+	$: {
+		let date = new Date(currentMonth.getTime())
+		date.setMonth(date.getMonth() - 1)
+		previousMonth = date
+	}
+
+	$: {
+		let date = new Date(currentMonth.getTime())
+		date.setMonth(date.getMonth() + 1)
+		nextMonth = date
+	}
+
+	$: previousMonthPath = getMonthPath(previousMonth, now)
+	$: nextMonthPath = getMonthPath(nextMonth, now)
+
 	function onVisibilityChange() {
 		const state = document.visibilityState
 
@@ -55,7 +74,7 @@
 	<meta name="description" content="Kalender med veckonummer och röda dagar." />
 </svelte:head>
 
-<Header {currentMonth} {now} />
+<Header {previousMonth} {previousMonthPath} {currentMonth} {nextMonth} {nextMonthPath} />
 <Container>
 	<main>
 		{#if month.loading}
@@ -76,6 +95,6 @@
 				<Weeks weeks={month.weeks} {currentMonth} {now} />
 			{/if}
 		{/if}
-		<ScrollToTopButton />
+		<MobileNav {previousMonth} {previousMonthPath} {nextMonth} {nextMonthPath} />
 	</main>
 </Container>

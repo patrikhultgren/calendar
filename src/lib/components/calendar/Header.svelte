@@ -4,31 +4,16 @@
 	import Container from '$lib/components/utils/Container.svelte'
 	import Arrow from '$lib/components/icon/Arrow.svelte'
 
-	export let now = new Date()
+	export let previousMonth: Date = new Date()
+	export let previousMonthPath: string = ''
 	export let currentMonth: Date = new Date()
-
-	let previousMonth: Date = new Date(currentMonth.getTime())
-	let nextMonth: Date = new Date(currentMonth.getTime())
-
-	$: {
-		let date = new Date(currentMonth.getTime())
-		date.setMonth(date.getMonth() - 1)
-		previousMonth = date
-	}
-
-	$: {
-		let date = new Date(currentMonth.getTime())
-		date.setMonth(date.getMonth() + 1)
-		nextMonth = date
-	}
-
-	$: previousMonthPath = getMonthPath(previousMonth, now)
-	$: nextMonthPath = getMonthPath(nextMonth, now)
+	export let nextMonth: Date = new Date()
+	export let nextMonthPath: string = ''
 </script>
 
 <header>
 	<Container className="border-b border-gray-300">
-		<nav class="flex justify-between">
+		<nav aria-label="Huvudmeny" class="flex justify-between">
 			<a
 				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"
 				href={previousMonthPath}
