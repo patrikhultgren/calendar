@@ -15,7 +15,7 @@
 	<Container className="border-b border-gray-300">
 		<nav aria-label="Huvudmeny" class="flex justify-between">
 			<a
-				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"
+				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded text-xl font-bold"
 				href={previousMonthPath}
 			>
 				<Arrow direction="left" />
@@ -27,7 +27,7 @@
 				<span class="hidden sm:inline">{format(currentMonth, 'MMMM yyyy')}</span>
 			</h1>
 			<a
-				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded sm:text-xl font-bold"
+				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded text-xl font-bold"
 				href={nextMonthPath}
 			>
 				<span class="inline sm:hidden">{format(nextMonth, 'MMM')}</span>
