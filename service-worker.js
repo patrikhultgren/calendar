@@ -1,19 +1,19 @@
 const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), l = [
-  a + "/_app/immutable/entry/app.0e2bbc49.js",
-  a + "/_app/immutable/assets/0.72c9e66d.css",
-  a + "/_app/immutable/nodes/0.5f7e7047.js",
+  a + "/_app/immutable/entry/app.c9f80ce7.js",
+  a + "/_app/immutable/assets/0.f29a9360.css",
+  a + "/_app/immutable/nodes/0.bc118370.js",
   a + "/_app/immutable/assets/sofiapro-light-webfont.44cf56d3.woff2",
   a + "/_app/immutable/assets/sofiapro-light-webfont.e8624630.woff",
-  a + "/_app/immutable/nodes/1.8a5447bf.js",
-  a + "/_app/immutable/nodes/2.720ecc1e.js",
+  a + "/_app/immutable/nodes/1.8309cecd.js",
+  a + "/_app/immutable/nodes/2.99d73c69.js",
   a + "/_app/immutable/assets/Container.6bf551a2.css",
   a + "/_app/immutable/chunks/Container.9a7d2acd.js",
   a + "/_app/immutable/chunks/index.1b23dfab.js",
   a + "/_app/immutable/chunks/index.e351a105.js",
-  a + "/_app/immutable/chunks/singletons.7fbb5af0.js",
-  a + "/_app/immutable/chunks/stores.26b58beb.js",
-  a + "/_app/immutable/entry/start.fb1e43cc.js"
-], r = [
+  a + "/_app/immutable/chunks/singletons.d00da755.js",
+  a + "/_app/immutable/chunks/stores.94b971d5.js",
+  a + "/_app/immutable/entry/start.7ed60533.js"
+], d = [
   a + "/.nojekyll",
   a + "/android-chrome-192x192.png",
   a + "/android-chrome-512x512.png",
@@ -31,10 +31,10 @@ const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), l
   a + "/logo.html",
   a + "/robots.txt",
   a + "/site.webmanifest"
-], u = "1683797444503", c = `cache-${u}`, p = [
+], r = "1683798887832", c = `cache-${r}`, p = [
   ...l,
   // the app itself
-  ...r
+  ...d
   // everything in `static`
 ];
 self.addEventListener("install", (e) => {
