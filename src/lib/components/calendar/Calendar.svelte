@@ -15,6 +15,8 @@
 	import Weeks from './Weeks.svelte'
 	import ScrollToTopButton from './ScrollToTopButton.svelte'
 
+	let count = 0
+
 	$: searchParams = browser && $page.url.searchParams
 
 	$: now = new Date()
@@ -29,6 +31,7 @@
 
 	$: {
 		if (mounted) {
+			count++
 			month.loading = true
 
 			fetchMonth(currentMonth).then((data) => {
@@ -56,6 +59,7 @@
 <Header {currentMonth} {now} />
 <Container>
 	<main>
+		C:{count}
 		{#if month.loading}
 			<Placeholder className="w-full h-[16rem] sm:h-[39rem]" />
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
