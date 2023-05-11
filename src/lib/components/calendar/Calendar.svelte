@@ -14,6 +14,7 @@
 	import Header from './Header.svelte'
 	import Table from './Table.svelte'
 	import Weeks from './Weeks.svelte'
+	import Offline from './Offline.svelte'
 	import ScrollToTopButton from './ScrollToTopButton.svelte'
 
 	$: searchParams = browser && $page.url.searchParams
@@ -57,15 +58,14 @@
 <Header {currentMonth} {now} />
 <Container>
 	<main>
-		{#if !$online}
-			OFFLINE
-		{/if}
 		{#if month.loading}
 			<Placeholder className="w-full h-[16rem] sm:h-[39rem]" />
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
+		{:else if !$online && month.error}
+			<Offline />
 		{:else if month.error}
 			<Error className="pt-8" />
 		{/if}
