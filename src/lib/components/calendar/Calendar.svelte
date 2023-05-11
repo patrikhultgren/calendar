@@ -68,12 +68,13 @@
 			<Offline />
 		{:else if month.error}
 			<Error className="pt-8" />
-		{/if}
-		{#if month.weeks}
-			<Table weeks={month.weeks} {currentMonth} {now} />
-		{/if}
-		{#if month.weeks}
-			<Weeks weeks={month.weeks} {currentMonth} {now} />
+		{:else}
+			{#if month.weeks}
+				<Table weeks={month.weeks} {currentMonth} {now} />
+			{/if}
+			{#if month.weeks}
+				<Weeks weeks={month.weeks} {currentMonth} {now} />
+			{/if}
 		{/if}
 		<ScrollToTopButton />
 	</main>
