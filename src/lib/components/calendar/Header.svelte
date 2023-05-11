@@ -13,21 +13,23 @@
 
 <header>
 	<Container className="border-b border-gray-300">
-		<nav aria-label="Huvudmeny" class="flex justify-between">
+		<nav aria-label="Huvudmeny" class="flex">
 			<a
-				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded text-xl font-bold"
+				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded text-xl font-bold basis-1/4 justify-start"
 				href={previousMonthPath}
 			>
 				<Arrow direction="left" />
 				<span class="inline sm:hidden">{format(previousMonth, 'MMM')}</span>
 				<span class="hidden sm:inline">{format(previousMonth, 'MMMM')}</span>
 			</a>
-			<h1 class="flex items-center capitalize px-4 text-2xl sm:text-4xl font-bold">
+			<h1
+				class="flex items-center capitalize px-4 text-xl sm:text-4xl font-bold basis-2/4 justify-center"
+			>
 				<span class="inline sm:hidden">{format(currentMonth, 'MMM yyyy')}</span>
 				<span class="hidden sm:inline">{format(currentMonth, 'MMMM yyyy')}</span>
 			</h1>
 			<a
-				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded text-xl font-bold"
+				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded text-xl font-bold basis-1/4 justify-end"
 				href={nextMonthPath}
 			>
 				<span class="inline sm:hidden">{format(nextMonth, 'MMM')}</span>
