@@ -28,18 +28,6 @@
 			: now.getTime()
 	)
 
-	let month: IMonth = { ...initialState }
-
-	$: {
-		if (mounted) {
-			month.loading = true
-
-			fetchMonth(currentMonth).then((data) => {
-				month = data
-			})
-		}
-	}
-
 	$: previousMonth = new Date(currentMonth.getTime())
 	$: nextMonth = new Date(currentMonth.getTime())
 
@@ -57,6 +45,18 @@
 
 	$: previousMonthPath = getMonthPath(previousMonth, now)
 	$: nextMonthPath = getMonthPath(nextMonth, now)
+
+	let month: IMonth = { ...initialState }
+
+	$: {
+		if (mounted) {
+			month.loading = true
+
+			fetchMonth(currentMonth).then((data) => {
+				month = data
+			})
+		}
+	}
 
 	function onVisibilityChange() {
 		const state = document.visibilityState
