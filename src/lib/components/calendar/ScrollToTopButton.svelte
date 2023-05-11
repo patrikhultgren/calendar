@@ -1,8 +1,11 @@
 <script lang="ts">
 	import classNames from 'classnames'
 	import Arrow from '$lib/components/icon/Arrow.svelte'
+	import { getIsFullscreen } from '$lib/utils/deviceStatus'
 
-	const showClass = 'bottom-4'
+	const isFullscreen = getIsFullscreen()
+
+	const showClass = isFullscreen ? 'bottom-8' : 'bottom-4'
 	const hideClass = '-bottom-[4rem]'
 
 	let toggleClass = 'show'
