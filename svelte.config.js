@@ -1,6 +1,5 @@
 import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/kit/vite'
-import { dev } from '$app/environment'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -8,7 +7,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		paths: {
-			base: dev ? '' : '/calendar'
+			base: process.env.NODE_ENV === 'production' ? '/calendar' : ''
 		}
 	}
 }
