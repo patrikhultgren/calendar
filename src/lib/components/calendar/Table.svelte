@@ -33,11 +33,24 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each weeks as week}
+		{#each weeks as week, i}
 			<tr>
-				<td class="text-center border border-gray-400 font-bold sm:text-xl bg-gray-100"
-					>{week[0].week.toString().padStart(2, '0')}</td
+				<td
+					class={classNames(
+						'text-center',
+						'border-gray-400',
+						'font-bold',
+						'sm:text-xl',
+						'border-x',
+						{ 'border-t': i === 0 },
+						{ 'border-b': i === weeks.length - 1 },
+						week.some((day) => format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd'))
+							? 'bg-gray-100 border-y'
+							: 'bg-gray-200'
+					)}
 				>
+					{week[0].week.toString().padStart(2, '0')}
+				</td>
 				{#each week as day}
 					<td
 						class={classNames(
