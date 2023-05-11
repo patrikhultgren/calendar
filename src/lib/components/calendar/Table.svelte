@@ -42,7 +42,7 @@
 					<td
 						class={classNames(
 							{
-								'bg-red-200': day.isRedDay
+								'bg-red-100': day.isRedDay
 							},
 							{
 								'bg-gray-100': !day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
@@ -63,20 +63,20 @@
 									{format(day.date, day.date.getDate() === 1 ? 'd MMMM' : 'd')}
 								</div>
 								{#if day.flagDay}
-									<SwedishFlag className="w-6 h-4 ml-auto rounded bg-red-900" />
+									<SwedishFlag className="w-6 h-4 ml-auto rounded" />
 								{/if}
 							</div>
 							<div class="hidden sm:block">
 								{#if day.flagDay}
-									<div class="text-sm text-red-600 font-bold break-words">
+									<div class="text-sm text-red-700 font-bold break-words">
 										{day.flagDay}
 									</div>
 								{:else if day.holiday}
-									<div class="text-sm text-red-600 font-bold break-words">
+									<div class="text-sm text-red-700 font-bold break-words">
 										{day.holiday}
 									</div>
 								{:else if day.holidayEvening}
-									<div class="text-sm text-red-600 font-bold break-words">
+									<div class="text-sm text-red-700 font-bold break-words">
 										{day.holidayEvening}
 									</div>
 								{/if}

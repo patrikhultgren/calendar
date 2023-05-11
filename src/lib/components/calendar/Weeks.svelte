@@ -20,7 +20,7 @@
 			{#each week as day}
 				<li
 					class={classNames(
-						{ 'bg-red-200': day.isRedDay },
+						{ 'bg-red-100': day.isRedDay },
 						{
 							'bg-gray-100': !day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
 						},
@@ -42,11 +42,11 @@
 						{/if}
 					</div>
 					{#if day.flagDay}
-						<div class="text-red-600 font-bold">{day.flagDay}</div>
+						<div class="text-red-700 font-bold">{day.flagDay}</div>
 					{:else if day.holiday}
-						<div class="text-red-600 font-bold">{day.holiday}</div>
+						<div class="text-red-700 font-bold">{day.holiday}</div>
 					{:else if day.holidayEvening}
-						<div class="text-red-600 font-bold">{day.holidayEvening}</div>
+						<div class="text-red-700 font-bold">{day.holidayEvening}</div>
 					{/if}
 					{#if day.names.length}
 						<div class="text-sm">{day.names.join(' • ')}</div>
