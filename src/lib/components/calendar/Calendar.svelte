@@ -75,26 +75,28 @@
 </svelte:head>
 
 <Header {previousMonth} {previousMonthPath} {currentMonth} {nextMonth} {nextMonthPath} />
-<Container>
-	<main>
-		{#if month.loading}
-			<Placeholder className="w-full h-[16rem] sm:h-[39rem]" />
-			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
-			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
-			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
-			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
-		{:else if !$online && month.error}
-			<Offline />
-		{:else if month.error}
-			<Error className="pt-8" />
-		{:else}
-			{#if month.weeks}
-				<Table weeks={month.weeks} {currentMonth} {now} />
+<div class="bg-white">
+	<Container>
+		<main>
+			{#if month.loading}
+				<Placeholder className="w-full h-[16rem] sm:h-[39rem]" />
+				<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
+				<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
+				<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
+				<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
+			{:else if !$online && month.error}
+				<Offline />
+			{:else if month.error}
+				<Error className="pt-8" />
+			{:else}
+				{#if month.weeks}
+					<Table weeks={month.weeks} {currentMonth} {now} />
+				{/if}
+				{#if month.weeks}
+					<Weeks weeks={month.weeks} {currentMonth} {now} />
+				{/if}
 			{/if}
-			{#if month.weeks}
-				<Weeks weeks={month.weeks} {currentMonth} {now} />
-			{/if}
-		{/if}
-		<MobileNav {previousMonth} {previousMonthPath} {nextMonth} {nextMonthPath} />
-	</main>
-</Container>
+			<MobileNav {previousMonth} {previousMonthPath} {nextMonth} {nextMonthPath} />
+		</main>
+	</Container>
+</div>

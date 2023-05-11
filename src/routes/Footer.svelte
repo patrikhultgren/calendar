@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Arrow from '$lib/components/icon/Arrow.svelte'
 	import Container from '$lib/components/utils/Container.svelte'
 
-	let footerInfo
+	let footerInfo: any
 	let show = false
 
 	function onToggle() {
@@ -14,11 +13,11 @@
 	}
 </script>
 
-<footer>
+<footer class="bg-gray-100 border-t border-gray-300">
 	<Container className="text-sm text-slate-900 pt-8 pb-20 sm:pb-8">
 		<button
 			on:click={onToggle}
-			class="mx-auto px-4 py-3 rounded bg-gray-100 hover:bg-gray-200 border flex"
+			class="mx-auto px-4 py-3 rounded bg-black hover:bg-gray-800 border flex text-white font-bold"
 		>
 			<span class="mr-1">Om sajten</span>
 		</button>
