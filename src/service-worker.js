@@ -1,74 +1,76 @@
 /// <reference types="@sveltejs/kit" />
-import { build, files, version } from '$service-worker'
+import { base, build, files, version } from '$service-worker'
 
-// Create a unique cache name for this deployment
-const CACHE = `cache-${version}`
+if (base) {
+	// Create a unique cache name for this deployment
+	const CACHE = `cache-${version}`
 
-const ASSETS = [
-	...build, // the app itself
-	...files // everything in `static`
-]
+	const ASSETS = [
+		...build, // the app itself
+		...files // everything in `static`
+	]
 
-self.addEventListener('install', (event) => {
-	// Create a new cache and add all files to it
-	async function addFilesToCache() {
-		const cache = await caches.open(CACHE)
-		await cache.addAll(ASSETS)
-		self.skipWaiting()
-	}
+	self.addEventListener('install', (event) => {
+		// Create a new cache and add all files to it
+		async function addFilesToCache() {
+			const cache = await caches.open(CACHE)
+			await cache.addAll(ASSETS)
+			self.skipWaiting()
+		}
 
-	event.waitUntil(addFilesToCache())
-})
+		event.waitUntil(addFilesToCache())
+	})
 
-self.addEventListener('activate', (event) => {
-	// Remove previous cached data from disk
-	async function deleteOldCaches() {
-		for (const key of await caches.keys()) {
-			if (key !== CACHE) {
-				await caches.delete(key)
+	self.addEventListener('activate', (event) => {
+		// Remove previous cached data from disk
+		async function deleteOldCaches() {
+			for (const key of await caches.keys()) {
+				if (key !== CACHE) {
+					await caches.delete(key)
+				}
 			}
 		}
-	}
 
-	// The claim should remove the need of reloading the page before the new service worker is activated
-	event.waitUntil(deleteOldCaches())
-})
+		// The claim should remove the need of reloading the page before the new service worker is activated
+		event.waitUntil(deleteOldCaches())
+	})
 
-self.addEventListener('fetch', (event) => {
-	// Ignore POST requests etc
-	if (event.request.method !== 'GET') {
-		return
-	}
-
-	async function respond() {
-		const url = new URL(event.request.url)
-		const cache = await caches.open(CACHE)
-
-		// `build`/`files` can always be served from the cache
-		if (ASSETS.includes(url.pathname)) {
-			return cache.match(url.pathname)
+	self.addEventListener('fetch', (event) => {
+		// Ignore POST requests etc
+		if (event.request.method !== 'GET') {
+			return
 		}
 
-		// Try get response from cache before fetch
-		const responseFromCache = await cache.match(event.request)
+		async function respond() {
+			const url = new URL(event.request.url)
+			const cache = await caches.open(CACHE)
 
-		if (responseFromCache) {
-			return responseFromCache
-		}
-
-		// Nothing in cache, let's try fetch
-		try {
-			const response = await fetch(event.request)
-
-			if (response.status === 200) {
-				cache.put(event.request, response.clone())
+			// `build`/`files` can always be served from the cache
+			if (ASSETS.includes(url.pathname)) {
+				return cache.match(url.pathname)
 			}
 
-			return response
-		} catch {}
+			// Try get response from cache before fetch
+			const responseFromCache = await cache.match(event.request)
 
-		return null
-	}
+			if (responseFromCache) {
+				return responseFromCache
+			}
 
-	event.respondWith(respond())
-})
+			// Nothing in cache, let's try fetch
+			try {
+				const response = await fetch(event.request)
+
+				if (response.status === 200) {
+					cache.put(event.request, response.clone())
+				}
+
+				return response
+			} catch {}
+
+			return null
+		}
+
+		event.respondWith(respond())
+	})
+}
