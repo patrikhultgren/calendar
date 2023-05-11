@@ -9,6 +9,7 @@
 	import { months } from '$lib/config'
 	import callOnVisibilityChange from '$lib/utils/callOnVisibilityChange'
 	import { padValue } from '$lib/utils/number'
+	import { online } from '$lib/stores'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 	import Header from './Header.svelte'
 	import Table from './Table.svelte'
@@ -56,14 +57,16 @@
 <Header {currentMonth} {now} />
 <Container>
 	<main>
+		{#if !$online}
+			OFFLINE
+		{/if}
 		{#if month.loading}
 			<Placeholder className="w-full h-[16rem] sm:h-[39rem]" />
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
 			<Placeholder className="w-full h-[26rem] sm:h-[30rem] mt-8" />
-		{/if}
-		{#if month.error}
+		{:else if month.error}
 			<Error className="pt-8" />
 		{/if}
 		{#if month.weeks}
