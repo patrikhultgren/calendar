@@ -31,8 +31,10 @@ if (base) {
 			}
 		}
 
-		// The claim should remove the need of reloading the page before the new service worker is activated
 		event.waitUntil(deleteOldCaches())
+
+		// No need to wait for all tabs to be closed before the current service worker is activated
+		self.clients.claim()
 	})
 
 	self.addEventListener('fetch', (event) => {
