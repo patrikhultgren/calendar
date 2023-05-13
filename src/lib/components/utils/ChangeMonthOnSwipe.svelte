@@ -16,7 +16,7 @@
 
 <div
 	class={className}
-	use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: 'pan-y' }}
+	use:swipe={{ timeframe: 300, minSwipeDistance: 50, touchAction: 'pan-y' }}
 	on:swipe={swipeHandler}
 >
 	<slot />
