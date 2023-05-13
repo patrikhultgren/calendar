@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
-	import { swipe } from 'svelte-gestures'
 	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
 	import { getMonthPath } from '$lib/utils/path'
@@ -8,6 +6,7 @@
 	import Placeholder from '$lib/components/utils/Placeholder.svelte'
 	import Container from '$lib/components/utils/Container.svelte'
 	import Error from '$lib/components/utils/Error.svelte'
+	import ChangeMonthOnSwipe from '$lib/components/utils/ChangeMonthOnSwipe.svelte'
 	import mounted from '$lib/utils/mounted'
 	import { months } from '$lib/config'
 	import callOnVisibilityChange from '$lib/utils/callOnVisibilityChange'
@@ -62,13 +61,6 @@
 		}
 	}
 
-	let direction
-
-	function swipeHandler(event: any) {
-		direction = event.detail.direction
-		goto(direction === 'left' ? nextMonthPath : previousMonthPath)
-	}
-
 	function onVisibilityChange() {
 		const state = document.visibilityState
 
@@ -86,11 +78,7 @@
 </svelte:head>
 
 <Header {previousMonth} {previousMonthPath} {currentMonth} {nextMonth} {nextMonthPath} />
-<div
-	class="bg-white"
-	use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: 'pan-y' }}
-	on:swipe={swipeHandler}
->
+<ChangeMonthOnSwipe {previousMonthPath} {nextMonthPath} className="bg-white">
 	<Container>
 		<main>
 			{#if month.loading}
@@ -102,7 +90,7 @@
 			{:else if !$online && month.error}
 				<Offline />
 			{:else if month.error}
-				<Error className="pt-8" />
+				<Error className="py-8" />
 			{:else}
 				{#if month.weeks}
 					<Table weeks={month.weeks} {currentMonth} {now} />
@@ -114,4 +102,4 @@
 			<MobileNav {previousMonth} {previousMonthPath} {nextMonth} {nextMonthPath} />
 		</main>
 	</Container>
-</div>
+</ChangeMonthOnSwipe>
