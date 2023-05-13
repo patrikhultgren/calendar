@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
+	import { swipe } from 'svelte-gestures'
 	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
 	import { getMonthPath } from '$lib/utils/path'
@@ -24,7 +26,9 @@
 
 	$: currentMonth = new Date(
 		searchParams && searchParams.get('year') && searchParams.get('month')
-			? `${searchParams.get('year')}-${padValue(months.indexOf(searchParams.get('month')) + 1)}-01`
+			? `${searchParams.get('year')}-${padValue(
+					months.indexOf(searchParams.get('month') || '') + 1
+			  )}-01`
 			: now.getTime()
 	)
 
@@ -58,6 +62,13 @@
 		}
 	}
 
+	let direction
+
+	function swipeHandler(event: any) {
+		direction = event.detail.direction
+		goto(direction === 'left' ? nextMonthPath : previousMonthPath)
+	}
+
 	function onVisibilityChange() {
 		const state = document.visibilityState
 
@@ -75,7 +86,11 @@
 </svelte:head>
 
 <Header {previousMonth} {previousMonthPath} {currentMonth} {nextMonth} {nextMonthPath} />
-<div class="bg-white">
+<div
+	class="bg-white"
+	use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: 'pan-y' }}
+	on:swipe={swipeHandler}
+>
 	<Container>
 		<main>
 			{#if month.loading}
