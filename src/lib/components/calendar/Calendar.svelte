@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { browser, page } from '$app/stores'
 	import { getMonthPath } from '$lib/utils/path'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
 	import Placeholder from '$lib/components/utils/Placeholder.svelte'
@@ -19,7 +19,7 @@
 
 	$: now = new Date()
 
-	$: searchParams = $page.url.searchParams
+	$: searchParams = browser && $page.url.searchParams
 
 	$: currentMonth = getCurrentMonth(searchParams, now)
 
