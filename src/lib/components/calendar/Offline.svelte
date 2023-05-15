@@ -1,7 +1,3 @@
-<script lang="ts">
-	import Container from '$lib/components/utils/Container.svelte'
-</script>
-
 <div class="min-h-[65vh] flex items-center">
 	<div class="mx-auto px-4 mt-6 w-full block max-w-[500px] text-center">
 		<h2 class="font-bold text-2xl sm:text-3xl">Tappat uppkopplingen?</h2>
