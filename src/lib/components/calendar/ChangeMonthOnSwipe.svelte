@@ -6,11 +6,8 @@
 	export let previousMonthPath: string = ''
 	export let nextMonthPath: string = ''
 
-	let direction
-
 	function swipeHandler(event: any) {
-		direction = event.detail.direction
-		goto(direction === 'left' ? nextMonthPath : previousMonthPath)
+		goto(event.detail.direction === 'left' ? nextMonthPath : previousMonthPath)
 	}
 </script>
 
