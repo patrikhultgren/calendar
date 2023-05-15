@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
 	import { getMonthPath } from '$lib/utils/path'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
@@ -7,9 +6,8 @@
 	import Container from '$lib/components/utils/Container.svelte'
 	import Error from '$lib/components/utils/Error.svelte'
 	import mounted from '$lib/utils/mounted'
-	import { months } from '$lib/config'
 	import callOnVisibilityChange from '$lib/utils/callOnVisibilityChange'
-	import { padValue } from '$lib/utils/number'
+	import { getPreviousMonth, getCurrentMonth, getNextMonth } from '$lib/utils/date'
 	import { online } from '$lib/stores'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 	import Header from './Header.svelte'
@@ -19,34 +17,16 @@
 	import MobileNav from './MobileNav.svelte'
 	import ChangeMonthOnSwipe from './ChangeMonthOnSwipe.svelte'
 
-	$: searchParams = browser && $page.url.searchParams
-
 	$: now = new Date()
 
-	$: currentMonth = new Date(
-		searchParams && searchParams.get('year') && searchParams.get('month')
-			? `${searchParams.get('year')}-${padValue(
-					months.indexOf(searchParams.get('month') || '') + 1
-			  )}-01`
-			: now.getTime()
-	)
+	$: searchParams = $page.url.searchParams
 
-	$: previousMonth = new Date(currentMonth.getTime())
-	$: nextMonth = new Date(currentMonth.getTime())
+	$: currentMonth = getCurrentMonth(searchParams, now)
 
-	$: {
-		let date = new Date(currentMonth.getTime())
-		date.setMonth(date.getMonth() - 1)
-		previousMonth = date
-	}
-
-	$: {
-		let date = new Date(currentMonth.getTime())
-		date.setMonth(date.getMonth() + 1)
-		nextMonth = date
-	}
-
+	$: previousMonth = getPreviousMonth(currentMonth)
 	$: previousMonthPath = getMonthPath(previousMonth, now)
+
+	$: nextMonth = getNextMonth(currentMonth)
 	$: nextMonthPath = getMonthPath(nextMonth, now)
 
 	let month: IMonth = { ...initialState }
