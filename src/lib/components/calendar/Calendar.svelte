@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { browser, page } from '$app/stores'
+	import { browser } from '$app/environment'
+	import { page } from '$app/stores'
 	import { getMonthPath } from '$lib/utils/path'
 	import fetchMonth, { initialState } from '$lib/utils/fetchMonth'
 	import Placeholder from '$lib/components/utils/Placeholder.svelte'
