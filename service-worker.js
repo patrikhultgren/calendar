@@ -1,18 +1,18 @@
 const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), l = [
-  a + "/_app/immutable/entry/app.4753f015.js",
+  a + "/_app/immutable/entry/app.7604ae6c.js",
   a + "/_app/immutable/assets/0.65e54d77.css",
   a + "/_app/immutable/nodes/0.7d68179d.js",
   a + "/_app/immutable/assets/sofiapro-light-webfont.44cf56d3.woff2",
   a + "/_app/immutable/assets/sofiapro-light-webfont.e8624630.woff",
-  a + "/_app/immutable/nodes/1.a67936d2.js",
+  a + "/_app/immutable/nodes/1.e4737969.js",
   a + "/_app/immutable/assets/2.6bf551a2.css",
-  a + "/_app/immutable/nodes/2.50201e3c.js",
+  a + "/_app/immutable/nodes/2.1f6401e5.js",
   a + "/_app/immutable/chunks/Container.8a16cb38.js",
   a + "/_app/immutable/chunks/index.e0d45c7b.js",
   a + "/_app/immutable/chunks/index.f7c07964.js",
-  a + "/_app/immutable/chunks/singletons.f9f0e614.js",
-  a + "/_app/immutable/chunks/stores.655fbf9a.js",
-  a + "/_app/immutable/entry/start.b1fc319c.js"
+  a + "/_app/immutable/chunks/singletons.28958964.js",
+  a + "/_app/immutable/chunks/stores.a6b082e9.js",
+  a + "/_app/immutable/entry/start.9d106142.js"
 ], d = [
   a + "/.nojekyll",
   a + "/android-chrome-192x192.png",
@@ -31,9 +31,9 @@ const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), l
   a + "/logo.html",
   a + "/robots.txt",
   a + "/site.webmanifest"
-], f = "1684154428079";
+], m = "1684154605834";
 if (a) {
-  const n = `cache-${f}`, o = [
+  const n = `cache-${m}`, o = [
     ...l,
     // the app itself
     ...d
