@@ -6,7 +6,6 @@
 	import Placeholder from '$lib/components/utils/Placeholder.svelte'
 	import Container from '$lib/components/utils/Container.svelte'
 	import Error from '$lib/components/utils/Error.svelte'
-	import ChangeMonthOnSwipe from '$lib/components/utils/ChangeMonthOnSwipe.svelte'
 	import mounted from '$lib/utils/mounted'
 	import { months } from '$lib/config'
 	import callOnVisibilityChange from '$lib/utils/callOnVisibilityChange'
@@ -18,6 +17,7 @@
 	import Weeks from './Weeks.svelte'
 	import Offline from './Offline.svelte'
 	import MobileNav from './MobileNav.svelte'
+	import ChangeMonthOnSwipe from './ChangeMonthOnSwipe.svelte'
 
 	$: searchParams = browser && $page.url.searchParams
 
