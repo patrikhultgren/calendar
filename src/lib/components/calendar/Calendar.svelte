@@ -12,7 +12,7 @@
 	import { online } from '$lib/stores'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 	import Header from './Header.svelte'
-	import Table from './Table.svelte'
+	import Days from './Days.svelte'
 	import Weeks from './Weeks.svelte'
 	import Offline from './Offline.svelte'
 	import MobileNav from './MobileNav.svelte'
@@ -73,7 +73,7 @@
 			{:else if month.error}
 				<Error className="py-8" />
 			{:else if month.weeks}
-				<Table weeks={month.weeks} {currentMonth} {now} />
+				<Days weeks={month.weeks} {currentMonth} {now} />
 				<Weeks weeks={month.weeks} {currentMonth} {now} />
 			{/if}
 			<MobileNav {previousMonth} {previousMonthPath} {nextMonth} {nextMonthPath} />
