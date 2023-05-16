@@ -72,13 +72,9 @@
 				<Offline />
 			{:else if month.error}
 				<Error className="py-8" />
-			{:else}
-				{#if month.weeks}
-					<Table weeks={month.weeks} {currentMonth} {now} />
-				{/if}
-				{#if month.weeks}
-					<Weeks weeks={month.weeks} {currentMonth} {now} />
-				{/if}
+			{:else if month.weeks}
+				<Table weeks={month.weeks} {currentMonth} {now} />
+				<Weeks weeks={month.weeks} {currentMonth} {now} />
 			{/if}
 			<MobileNav {previousMonth} {previousMonthPath} {nextMonth} {nextMonthPath} />
 		</main>
