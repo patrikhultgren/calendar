@@ -6,7 +6,7 @@
 
 	export let now = new Date()
 	export let weeks: Array<Array<ICalendarDay>> = []
-	export let currentMonth: Date = new Date()
+	export let activeMonth: Date = new Date()
 
 	const columns: Array<{ short: string; long: string; class: string }> = [
 		{ short: 'V', long: 'Vecka', class: 'w-[9%] sm:w-[5%]' },
@@ -58,7 +58,7 @@
 								'bg-red-100': day.isRedDay
 							},
 							{
-								'bg-gray-100': !day.isRedDay && day.date.getMonth() !== currentMonth.getMonth()
+								'bg-gray-100': !day.isRedDay && day.date.getMonth() !== activeMonth.getMonth()
 							},
 							format(day.date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')
 								? 'border-4 border-gray-500'

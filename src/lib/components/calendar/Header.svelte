@@ -6,7 +6,7 @@
 
 	export let previousMonth: Date = new Date()
 	export let previousMonthPath: string = ''
-	export let currentMonth: Date = new Date()
+	export let activeMonth: Date = new Date()
 	export let nextMonth: Date = new Date()
 	export let nextMonthPath: string = ''
 </script>
@@ -25,8 +25,8 @@
 			<h1
 				class="flex items-center capitalize px-4 text-xl sm:text-4xl font-bold basis-2/4 justify-center"
 			>
-				<span class="inline sm:hidden">{format(currentMonth, 'MMM yyyy')}</span>
-				<span class="hidden sm:inline">{format(currentMonth, 'MMMM yyyy')}</span>
+				<span class="inline sm:hidden">{format(activeMonth, 'MMM yyyy')}</span>
+				<span class="hidden sm:inline">{format(activeMonth, 'MMMM yyyy')}</span>
 			</h1>
 			<a
 				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded text-xl font-bold basis-1/4 justify-end"

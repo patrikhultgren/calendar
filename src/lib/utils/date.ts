@@ -17,7 +17,7 @@ export const format = (value: string | Date, dateFormat: string) => {
 	return ''
 }
 
-export const getCurrentMonth = (searchParams: URLSearchParams | false, now: Date) =>
+export const getActiveMonth = (searchParams: URLSearchParams | false, now: Date) =>
 	new Date(
 		searchParams && searchParams.get('year') && searchParams.get('month')
 			? `${searchParams.get('year')}-${padValue(
@@ -26,14 +26,14 @@ export const getCurrentMonth = (searchParams: URLSearchParams | false, now: Date
 			: now.getTime()
 	)
 
-export const getPreviousMonth = (currentMonth: Date) => {
-	const date = new Date(currentMonth.getTime())
+export const getPreviousMonth = (activeMonth: Date) => {
+	const date = new Date(activeMonth.getTime())
 	date.setMonth(date.getMonth() - 1)
 	return date
 }
 
-export const getNextMonth = (currentMonth: Date) => {
-	const date = new Date(currentMonth.getTime())
+export const getNextMonth = (activeMonth: Date) => {
+	const date = new Date(activeMonth.getTime())
 	date.setMonth(date.getMonth() + 1)
 	return date
 }

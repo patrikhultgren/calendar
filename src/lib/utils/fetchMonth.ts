@@ -41,22 +41,22 @@ export const initialState = {
 	error: null
 }
 
-const fetchMonth = async (currentMonth: Date): Promise<IMonth> => {
+const fetchMonth = async (activeMonth: Date): Promise<IMonth> => {
 	let monthAndNearbyDays: Array<any> = []
 
 	let previousMonth = new Date(
-		currentMonth.getFullYear(),
-		currentMonth.getMonth() - 1,
-		currentMonth.getDate()
+		activeMonth.getFullYear(),
+		activeMonth.getMonth() - 1,
+		activeMonth.getDate()
 	)
 
 	let nextMonth = new Date(
-		currentMonth.getFullYear(),
-		currentMonth.getMonth() + 1,
-		currentMonth.getDate()
+		activeMonth.getFullYear(),
+		activeMonth.getMonth() + 1,
+		activeMonth.getDate()
 	)
 
-	const monthDates = [previousMonth, currentMonth, nextMonth]
+	const monthDates = [previousMonth, activeMonth, nextMonth]
 
 	try {
 		const promises = []

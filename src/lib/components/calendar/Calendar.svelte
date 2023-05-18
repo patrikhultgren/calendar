@@ -8,7 +8,7 @@
 	import Error from '$lib/components/utils/Error.svelte'
 	import mounted from '$lib/utils/mounted'
 	import callOnVisibilityChange from '$lib/utils/callOnVisibilityChange'
-	import { getPreviousMonth, getCurrentMonth, getNextMonth } from '$lib/utils/date'
+	import { getPreviousMonth, getActiveMonth, getNextMonth } from '$lib/utils/date'
 	import { online } from '$lib/stores'
 	import type { IMonth } from '$lib/utils/fetchMonth'
 	import Header from './Header.svelte'
@@ -22,12 +22,12 @@
 
 	$: searchParams = browser && $page.url.searchParams
 
-	$: currentMonth = getCurrentMonth(searchParams, now)
+	$: activeMonth = getActiveMonth(searchParams, now)
 
-	$: previousMonth = getPreviousMonth(currentMonth)
+	$: previousMonth = getPreviousMonth(activeMonth)
 	$: previousMonthPath = getMonthPath(previousMonth, now)
 
-	$: nextMonth = getNextMonth(currentMonth)
+	$: nextMonth = getNextMonth(activeMonth)
 	$: nextMonthPath = getMonthPath(nextMonth, now)
 
 	let month: IMonth = { ...initialState }
@@ -36,7 +36,7 @@
 		if (mounted) {
 			month.loading = true
 
-			fetchMonth(currentMonth).then((data) => {
+			fetchMonth(activeMonth).then((data) => {
 				month = data
 			})
 		}
@@ -58,7 +58,7 @@
 	<meta name="description" content="Kalender med veckonummer och röda dagar." />
 </svelte:head>
 
-<Header {previousMonth} {previousMonthPath} {currentMonth} {nextMonth} {nextMonthPath} />
+<Header {previousMonth} {previousMonthPath} {activeMonth} {nextMonth} {nextMonthPath} />
 <ChangeMonthOnSwipe {previousMonthPath} {nextMonthPath} className="bg-white">
 	<Container>
 		<main>
@@ -73,8 +73,8 @@
 			{:else if month.error}
 				<Error className="py-8" />
 			{:else if month.weeks}
-				<Days weeks={month.weeks} {currentMonth} {now} />
-				<Weeks weeks={month.weeks} {currentMonth} {now} />
+				<Days weeks={month.weeks} {activeMonth} {now} />
+				<Weeks weeks={month.weeks} {activeMonth} {now} />
 			{/if}
 			<MobileNav {previousMonth} {previousMonthPath} {nextMonth} {nextMonthPath} />
 		</main>
