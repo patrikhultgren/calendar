@@ -59,7 +59,7 @@
 </svelte:head>
 
 <Header {previousMonth} {previousMonthPath} {activeMonth} {nextMonth} {nextMonthPath} />
-<ChangeMonthOnSwipe {previousMonthPath} {nextMonthPath} className="bg-white">
+<ChangeMonthOnSwipe {previousMonthPath} {nextMonthPath} className="bg-white sm:pt-4">
 	<Container>
 		<main>
 			{#if month.loading}

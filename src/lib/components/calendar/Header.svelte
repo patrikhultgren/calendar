@@ -12,7 +12,7 @@
 </script>
 
 <header>
-	<Container className="bg-black text-white">
+	<Container className="text-white">
 		<nav aria-label="Huvudmeny" class="flex">
 			<a
 				class="flex py-4 px-1 sm:px-4 items-center capitalize rounded text-xl font-bold basis-1/4 justify-start"
